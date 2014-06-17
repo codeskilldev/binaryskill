@@ -11,7 +11,11 @@
  *= require_self
  *= require_tree .
  *= require posts
+ *= require bootstrap
+ *= require alertify-themes/alertify.core
  ti*= require posts
+ *= require jquery.countdown.css
+ *= require bootstrap-wysihtml5/b3
  */
 
  html, body {
@@ -68,7 +72,7 @@ hr {
 }
 
 .form-devise > div {
-	margin: 10px;
+	/*margin: 10px;*/
 	width: 300px;
 }
 

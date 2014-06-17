@@ -24,10 +24,12 @@
     -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 .onoffswitch-inner:before {
+    content: "Working With";
     padding-left: 10px;
     background-color: #88B9C9; color: #FFFFFF;
 }
 .onoffswitch-inner:after {
+    content: "All TAs";
     padding-right: 10px;
     background-color: #A6C2FF; color: #999999;
     text-align: right;
