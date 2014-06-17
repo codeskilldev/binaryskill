@@ -1,0 +1,115 @@
+<!-- # [View Layout - Story 1.2]
+	# General layout for right side bar -->
+<!-- 
+	Author: Ahmed Elassuty
+	right nagigation bar 
+-->
+<!-- 
+	Author:Rania Abdel Fattah
+ -->
+<!-- 		<div style="padding-top: 30px; style="width:100%;""> -->
+	<div class="right_side list-group">
+		<a href="/" class="list-group-item"><span class="rectangle profile"></span>Profile</a>
+		<a href="/notifications" class="list-group-item"><span class="rectangle dashboard"></span>Dashboard</a>
+		<a href="/courses" class="list-group-item"><span class="rectangle courses"></span>Courses</a>
+		<a href="/contests" class="list-group-item"><span class="rectangle contests"></span>Contests</a>
+		<% if student_signed_in? %>
+			<a href="/students/edit" class="list-group-item"><span class="rectangle settings"></span>Settings</a>
+		<% elsif lecturer_signed_in? %>
+			<a href="/lecturers/edit" class="list-group-item"><span class="rectangle settings"></span>Settings</a>
+		<% else %>
+			<a href="/teaching_assistants/edit" class="list-group-item"><span class="rectangle settings"></span>Settings</a>
+		<% end %>
+	</div>
+<!--end of Rania's story -->
+
+	<% if student_signed_in? %>
+		<div class="right_side list-group table">
+			<% next_problems_to_solve = current_student.get_next_problems_to_solve %> 
+			<div class="panel-group">
+	  			<div class="panel panel-default">
+					<% if next_problems_to_solve != nil then %>
+							<div class="panel-heading icon glyphicon glyphicon-chevron-right"
+							data-toggle="collapse" data-parent="#accordion" href="#Nextproblems">
+								Next problems to solve
+							</div>
+							<div id="Nextproblems" class="panel-collapse collapse">
+								<div class="panel-body">
+									<% next_problems_to_solve.each do |key , value| %>
+										<div class="list-group-item">
+											<div>
+												<%= link_to value.title, 
+														controller: "/problems", 
+														action: "show", 
+														id: value.id %>
+											</div>
+											<div>
+												<%= key %>
+											</div>
+										</div>
+									<% end %>
+								</div>
+							</div>
+					<% else %>
+					You Have No Problems to solve, Please Subscribe to some courses
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<!--
+		# [Get Recommended Problems - Story 5.6]
+		# Displays the recommende problem hash in a table as [recommender_name | problem]
+		# Author: Mohab Ghanim
+		-->
+		<div class="right_side list-group table">
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<% recommended_problems = current_student.getClassMatesRecommendations 
+					if recommended_problems != nil then %>
+						<div class="panel-heading icon glyphicon glyphicon-chevron-right"
+							data-toggle="collapse" data-parent="#accordion"
+							href="#ClassmateRecommendations">
+							Classmates Recommendations
+						</div>
+						<div id="ClassmateRecommendations" class="panel-collapse collapse">
+							<div class="panel-body">
+								<% recommended_problems.each do |key , value| %>
+									<div class="list-group-item">
+										<div>
+											<%= link_to value["problem_title"], 
+													controller: "/problems", 
+													action: "show", 
+													id: key %>
+										</div>
+										<div>
+											<%= value["recommender_name"] %>
+										</div>
+									</div>
+								<% end %>
+							</div>
+						</div>	
+					<% end %>
+				</div>
+			</div>
+		</div>
+		
+		<div class="right_side list-group table">
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading icon glyphicon glyphicon-chevron-right"
+					data-toggle="collapse" data-parent="#accordion" href="#SystemRecommendation">
+						System Recommendations
+					</div>
+					<div id="SystemRecommendation" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="list-group-item">
+								<%= render "problems/system_recommendation" if student_signed_in? %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>
+
