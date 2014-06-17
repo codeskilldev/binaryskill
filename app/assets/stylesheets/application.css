@@ -12,7 +12,6 @@
  *= require_tree .
  *= require posts
  *= require bootstrap
- *= require alertify-themes/alertify.core
  *= require posts
  *= require jquery.countdown.css
  *= require bootstrap-wysihtml5/b3
