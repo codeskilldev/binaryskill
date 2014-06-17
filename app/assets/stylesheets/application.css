@@ -18,7 +18,7 @@
  *= require bootstrap-wysihtml5/b3
  */
 
- html, body {
+ /*html, body {
 	width: 100%;
 	height: 100%;
 	overflow-x: hidden;
@@ -72,7 +72,7 @@ hr {
 }
 
 .form-devise > div {
-	/*margin: 10px;*/
+	margin: 10px;
 	width: 300px;
 }
 
@@ -113,4 +113,4 @@ a:hover{
     background: none !important;
     color: #222;
     font-weight: bold;
-}
+}*/
