@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap
 //= require jquery_ujs
 //= require jquery-ui-1.10.4
 //= require jquery.bpopup.min
@@ -21,6 +20,7 @@
 //= require jquery.tokeninput
 //= require alertify
 //= require cocoon
+//= require bootstrap
 //= require bootstrap-wysihtml5/b3
 //= require bootstrap-wysihtml5/locales
 //= require_tree .
