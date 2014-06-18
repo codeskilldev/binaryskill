@@ -18,12 +18,7 @@
 //= require jquery.plugin
 //= require jquery.countdown
 //= require jquery.tokeninput
-//= require alertify
-//= require cocoon
-//= require bootstrap
-//= require bootstrap-wysihtml5/b3
-//= require bootstrap-wysihtml5/locales
-//= require sign_in
+//= require_tree .
 
 // [User Authentication Advanced - Story 5.9, 5.10, 5.11, 5.14, 5.15]
 // Adds the behaviour of flash messages of the types alert, notice and error
