@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-1.10.4
-//= require jquery.bpopup
+//= require jquery.bpopup.min
 //= require jquery.simple-dtpicker
 //= require jquery.tokeninput
 //= require alertify
