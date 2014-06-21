@@ -112,7 +112,7 @@ class SolutionsController < ApplicationController
 		submissions = @problem.solutions
 		@students = Hash.new
 		submissions.each do |submission|
-			student = Student.find_by_id(submission.student_id)
+			student = submission.student
 			@students[student.id] = [submission, student]
 		end
 		@course = @problem.assignment.course
