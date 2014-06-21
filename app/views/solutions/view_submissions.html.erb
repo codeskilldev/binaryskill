@@ -13,11 +13,10 @@
 					<td width="50px"></td>
 					<td style = "font-weight:bold;font-size:200%;">Passed test cases</td>
 				</tr>
-					<% @counter = 0 %>
-					<% @submissions.each do |submission| %>
-						<% @counter+= 1 %>
+					<% @students.each do |submissionA| %>
 						<tr class="spaceAbove">
-							<% @student = @students[@counter] %>
+							<% @student = submissionA[1] %>
+							<% submission = submissionA[0] %>
 							<td><%= @student.name %></td>
 							<td width="50px"></td>
 							<td title = "<%= @problem.description %>"><%= @problem.title %></td>
