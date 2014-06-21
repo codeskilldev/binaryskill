@@ -13,7 +13,7 @@
 					<td width="50px"></td>
 					<td style = "font-weight:bold;font-size:200%;">Passed test cases</td>
 				</tr>
-					<% @students.each do |submissionA| %>
+					<% @students.each do |student_id, submissionA| %>
 						<tr class="spaceAbove">
 							<% student = submissionA[1] %>
 							<% submission = submissionA[0] %>
