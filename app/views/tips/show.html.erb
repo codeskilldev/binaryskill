@@ -1,0 +1,21 @@
+<% if (lecturer_signed_in? || teaching_assistant_signed_in?) && session[:model_answer_id] != nil %>
+	<div>
+		<h1>
+			Tip content:
+		</h1>
+		<h3>
+			"<%= @tip.message %>"
+		</h3>
+		<p>
+			<h1>
+				Time:
+			</h1>
+			<h3>
+				<%= @tip.time %> seconds
+			</h3>
+		</p><br>
+		<p>
+			You will be redirected to the model answer page shortly...
+		</p>
+	</div>
+<% end %>

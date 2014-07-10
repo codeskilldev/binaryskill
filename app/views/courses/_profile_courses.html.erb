@@ -1,0 +1,9 @@
+			<table class = "table table-striped", style = "width:80%">
+				<% @courses.each do |course| %>
+					<tr>
+						<td>
+							<%= link_to course.name, course %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
