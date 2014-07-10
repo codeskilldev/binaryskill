@@ -1,4 +1,4 @@
-== Tutor
+== BinarySkill
 
 To run Unicorn Server ==> foreman start 
 
