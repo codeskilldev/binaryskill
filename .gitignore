@@ -20,6 +20,7 @@
 /public/uploads/*
 *.rbc
 capybara-*.html
+.rspec
 /coverage/
 /spec/tmp
 **.orig
@@ -28,7 +29,7 @@ pickle-email-*.html
 /config/secrets.yml
 
 # Ignoring migrations
-db/migrate/*.rb
+# db/migrate/*.rb
 
 # These should all be checked in to normalise the environment:
 Gemfile.lock, .ruby-version, .ruby-gemset
