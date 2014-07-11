@@ -9,11 +9,11 @@ uinstall:
 	sudo apt-get libpq-dev
 
 usearch:
-	../elasticsearch-1.2.1/bin/elasticsearch &
+	../elasticsearch/bin/elasticsearch &
 
 usearch-clean:
-	rm -rf ../elasticsearch-1.2.1/data/elasticsearch/nodes/*
-	rm -rf ../elasticsearch-1.2.1/logs/*
+	rm -rf ../elasticsearch/data/elasticsearch/nodes/*
+	rm -rf ../elasticsearch/logs/*
 
 useed: usearch-clean usearch
 	rake db:schema:load

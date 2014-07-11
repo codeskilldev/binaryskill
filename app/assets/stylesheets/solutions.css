@@ -174,3 +174,15 @@ textarea  {
 	color: white;
 	font-size: 2em;
 }
+
+img.solution-editor{
+	height: 24px;
+	width: 24px;
+	vertical-align: text-bottom;
+}
+
+img.solution-bar{
+	height: 26px;
+	width: 26px;
+	vertical-align: middle;
+}

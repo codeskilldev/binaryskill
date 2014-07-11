@@ -25,26 +25,31 @@ class PythonDebugger < Debugger
 	# Returns: A List of all 100 steps ahead
 	# Authors: Mussab ElDash + Rami Khalil
 	def start(class_name, input, time = 30)
-		$step = "next"
+		$step = "step"
 		$wait_thread = nil
 		$TERM = /\(Pdb\) The program finished and will be restarted\r\n/m
-		$regex = [/(\(Pdb\) )?.+->.+\r\n$/m]
+		# $regex = [/(\(Pdb\) )?.+->.+\r\n$/m]
+		$regex = [/\r\n\(Pdb\) $/m]
 		$all = []
 		status = "The debugging session was successful."
 		begin
-			$output, slave = PTY.open
-			master, $input = IO.pipe
-			pid = spawn("python -m pdb #{class_name}", :in=>master, :out=>slave)
-			master.close
-			slave.close
+			# $output, slave = PTY.open
+			# master, $input = IO.pipe
+			# pid = spawn("python -m pdb #{class_name}", :in=>master, :out=>slave)
+			# master.close
+			# slave.close
+			$output, $input, pid = PTY.spawn("python -m pdb #{class_name}")
 			nums = get_line
 			locals = get_variables
+			stack = get_stack_trace
 			nums[:locals] = locals
+			nums[:stack] = stack
 			$all << nums
 			status = TimeLimit.start(time){
 				debug
 			}
 		rescue => e
+			p e
 			unless e.message === 'Exited'
 				return false
 			end
@@ -65,13 +70,19 @@ class PythonDebugger < Debugger
 	# Returns: The number of the line to be executed
 	# Author: Mussab ElDash
 	def get_line
-		out_stream = buffer_until $regex, true
+		# out_stream = buffer_until $regex, true
+		out_stream = buffer_until $regex
+		string_start_index = [out_stream.index(/\r\n/) + 2, out_stream.index(/>/)].min
+		# p out_stream
+		out_stream = out_stream[string_start_index..-9]
+		# p out_stream
 		exceptions = has_exception out_stream
 		name_string = $class_name.sub(/\.py/,"")
 		/#{name_string}\.py\(\d+\).*\r\n/ =~ out_stream
 		line_first_string = $&
 		/\d+/ =~ line_first_string
 		line_first = $&
+		# p line_first
 		if line_first
 			exceptions[:line] = line_first.to_i
 			stream = get_stream out_stream, line_first.to_i
@@ -83,17 +94,29 @@ class PythonDebugger < Debugger
 			return exceptions
 		else
 			if exceptions[:exception]
-				if $all[-1]
-					$all[-1][:stream].sub(/#{exceptions[:exception]}$/m, "")
+				# p exceptions[:exception]
+				if !$all[-2].nil? && !exceptions[:exception].empty? &&
+					$all[-2][:stream] =~ /#{exceptions[:exception]}$/m
+					# puts "-2"
+					stream = $all[-2][:stream].sub(/#{exceptions[:exception]}$/m, "")
+					$all[-2][:stream] = stream
+					$all[-2][:exception] = exceptions[:exception]
+					$all[-2][:status] = false
+					$all.delete($all[-1])
+				elsif $all[-1]
+					# puts "-1"
+					stream = $all[-1][:stream].sub(/#{exceptions[:exception]}$/m, "")
+					$all[-1][:stream] = stream
 					$all[-1][:exception] = exceptions[:exception]
 					$all[-1][:status] = false
 				else
+					# puts "end"
 					first_step = exceptions[:exception]
 					first_step =~ /, line \d+/
 					second_step = $&
 					third_step = second_step[7..-1]
 					exceptions[:line] = third_step.to_i
-				end
+				end				
 			end
 			raise 'Exited'
 		end
@@ -120,7 +143,7 @@ class PythonDebugger < Debugger
 	# Author: Mussab ElDash
 	def get_exception(line)
 		second_step = ""
-		first_step = line.sub(/> <string>\(1\)<module>\(\)->None\r\n/m, "")
+		first_step = line.sub(/> <string>\(1\)<module>\(\)->None/m, "")
 		second_step = first_step.sub(/.*\(Pdb\) /m, "")
 		third_step = second_step.sub(/\-\-[A-Z][a-z]*\-\-\r\n/,"")
 		return third_step
@@ -134,11 +157,12 @@ class PythonDebugger < Debugger
 	# Author: Mussab ElDash
 	def get_stream(line, num)
 		name = $class_name.sub(/\.py/,"")
-		regex = /(\-\-[A-Z][a-z]*\-\-\r\n)?> (\/[a-zA-Z0-9\-_]+)*\/#{name}\.py\(#{num}\).*\r\n$/m
+		regex = /(\-\-[A-Z][a-z]*\-\-\r\n)?> (\/[a-zA-Z0-9\-_]+)*\/#{name}\.py\(#{num}\).*$/m
 		stream = line.sub(regex, "")
 		regexp1 = /\(Pdb\) .*\(Pdb\) /m
 		stream = stream.sub(regexp1, "")
-		stream = stream.sub($buffer_regex, "")
+		# p stream
+		# stream = stream.sub($buffer_regex, "")
 		return stream
 	end
 
@@ -173,8 +197,11 @@ class PythonDebugger < Debugger
 	def get_object_value name
 		result = ""
 		input name[1..-2] + ".__dict__"
-		output_buffer = buffer_until [/\{.*\}\r\n$/m], true
-		output_buffer = output_buffer.sub($buffer_regex, "")
+		# output_buffer = buffer_until [/\{.*\}\r\n$/m], true
+		output_buffer = buffer_until $regex
+		string_start_index = output_buffer.index("\r\n") + 2
+		output_buffer = output_buffer[string_start_index..-9]
+		# output_buffer = output_buffer.sub($buffer_regex, "")
 		output_buffer.each_line do |line|
 			result << line
 		end
@@ -196,8 +223,11 @@ class PythonDebugger < Debugger
 	def get_variable type, name
 		value = ""
 		input type + "[" + name + "]"
-		output_buffer = buffer_until [/(\(Pdb\) )*.*\r\n/m], true
-		output_buffer = output_buffer.sub($buffer_regex, "")
+		# output_buffer = buffer_until [/(\(Pdb\) )*.*\r\n/m], true
+		output_buffer = buffer_until $regex
+		string_start_index = output_buffer.index("\r\n") + 2
+		output_buffer = output_buffer[string_start_index..-9]
+		# output_buffer = output_buffer.sub($buffer_regex, "")
 		output_buffer.each_line do |line|
 			value << line
 		end
@@ -224,19 +254,26 @@ class PythonDebugger < Debugger
 		all_lines = ""
 		result = []
 		input type + ".keys()"
-		output_buffer = buffer_until [/^(\(Pdb\) )*\[.*\]\r\n$/m], true
+		# output_buffer = buffer_until [/^(\(Pdb\) )*\[.*\]\r\n$/m], true
+		output_buffer = buffer_until $regex
 		# p output_buffer
-		output_buffer = output_buffer.sub(/.*\(Pdb\) /m, "")
-		output_buffer = output_buffer.sub($buffer_regex, "")
+		string_start_index = output_buffer.index("\r\n") + 2
+		output_buffer = output_buffer[string_start_index..-9]
+		# p output_buffer
+		# output_buffer = output_buffer.sub(/.*\(Pdb\) /m, "")
+		# output_buffer = output_buffer.sub($buffer_regex, "")
+		# p output_buffer
 		output_buffer.each_line do |line|
 			all_lines << line
 		end
-		all_lines_trimmed = all_lines[1..-4]
+		all_lines_trimmed = all_lines[1..-2]
+		# p all_lines_trimmed
 		list_of_variables = all_lines_trimmed.split(", ")
 		list_of_variables.each do |variable|
 			name = variable
 			value = get_variable type, name
 			if is_valid_variable name, value
+				name = name[1..-2]
 				if type == "globals()"
 					name = "global." + name
 				end
@@ -274,11 +311,18 @@ class PythonDebugger < Debugger
 	# Author: Khaled Helmy
 	def get_stack_trace
 		stack_trace = []
-		if false
+		if true
 			input "w"
-			output_buffer = buffer_until [/.*>.*\r\n->.*\r\n$/m], true
-			output_buffer = output_buffer.sub($buffer_regex, "")
-			output_buffer = output_buffer[3..-3]
+			# output_buffer = buffer_until [/.*>.*\r\n->.*\r\n$/m], true
+			output_buffer = buffer_until $regex
+			# p output_buffer
+			string_start_index = output_buffer.index("\r\n") + 4
+			output_buffer = output_buffer[string_start_index..-9]
+			output_buffer = change_tags_to_html(output_buffer)
+			# p output_buffer
+			# output_buffer = output_buffer.sub($buffer_regex, "")
+			# output_buffer = output_buffer[3..-1]
+			# p output_buffer
 			output_buffer.each_line do |line|
 				stack_trace << line
 			end
