@@ -174,3 +174,9 @@ textarea  {
 	color: white;
 	font-size: 2em;
 }
+
+img.solution-image{
+	height: 24px;
+	width: 24px;
+	vertical-align: text-bottom
+}
