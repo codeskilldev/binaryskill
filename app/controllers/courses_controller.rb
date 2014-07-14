@@ -164,7 +164,7 @@ class CoursesController < ApplicationController
 	# Returns: The view of the requested course
 	# Author: Mohamed Metawaa
 	def show
-		@course = Course.find_by_id(params[:id])
+		@course = Course.find_by_id(params[:id]).include(:topics)
 		if @course
 			@topics = @course.topics
 			tracks = []

@@ -175,10 +175,10 @@ class Student < ActiveRecord::Base
 	# Author: Mohab Ghanim (Modified from Rami Khalil's Story 3.9)
 	def get_next_problems_to_solve
 		next_problems_to_solve = Hash.new
-		courses.each do |course|
-			course.topics.each do |topic|
+		courses.includes(:topics).each do |course|
+			course.topics.includes(:tracks).each do |topic|
 				level = TrackProgression.get_progress(self.id, topic.id)
-				topic.tracks.each do |track|
+				topic.tracks.includes(:problems).each do |track|
 					if track.difficulty == level
 						track.problems.each do |problem|
 							if !problem.is_solved_by_student(self.id)
@@ -203,7 +203,7 @@ class Student < ActiveRecord::Base
 	# 'recommender_name' and 'problem_title'  
 	# Author: Mohab Ghanim
 	def getClassMatesRecommendations
-		recommended_problems = Recommendation.where(:student_id => self.id)
+		recommended_problems = Recommendation.where(:student_id => self.id).includes(:problem)
 		recommended_problems_hash = Hash.new
 		recommended_problems.each do |problem|
 			next if problem.problem.is_solved_by_student self.id
