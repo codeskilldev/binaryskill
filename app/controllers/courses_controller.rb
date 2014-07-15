@@ -164,16 +164,16 @@ class CoursesController < ApplicationController
 	# Returns: The view of the requested course
 	# Author: Mohamed Metawaa
 	def show
-		@course = Course.find_by_id(params[:id]).include(:topics)
+		@course = Course.includes(:topics).find_by_id(params[:id])
 		if @course
 			@topics = @course.topics
 			tracks = []
-			@topics.each do |t|
+			@topics.includes(:tracks).each do |t|
 				tracks = tracks + t.tracks
 			end			
 			@assignments = @course.assignments
 			assignment_problems = []
-			@assignments.each do |a|
+			@assignments.includes(:problems).each do |a|
 				assignment_problems = assignment_problems + a.problems
 			end
 			@can_edit = @course.can_edit(current_lecturer, current_teaching_assistant)
