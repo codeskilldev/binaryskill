@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617132031) do
+ActiveRecord::Schema.define(version: 20140715181726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20140617132031) do
     t.string   "title"
     t.text     "description"
     t.integer  "final_grade",   default: 0
-    t.boolean  "incomplete",    default: true
     t.integer  "assignment_id"
     t.integer  "owner_id"
     t.string   "owner_type"
@@ -168,7 +167,6 @@ ActiveRecord::Schema.define(version: 20140617132031) do
     t.string   "code"
     t.integer  "year"
     t.integer  "semester"
-    t.string   "university"
     t.text     "description"
     t.boolean  "visible",     default: false
     t.boolean  "incomplete",  default: true
@@ -195,7 +193,6 @@ ActiveRecord::Schema.define(version: 20140617132031) do
     t.string   "title"
     t.text     "description"
     t.integer  "time_limit"
-    t.boolean  "incomplete",  default: true
     t.integer  "owner_id"
     t.string   "owner_type"
     t.datetime "created_at"
@@ -406,6 +403,19 @@ ActiveRecord::Schema.define(version: 20140617132031) do
     t.datetime "updated_at"
   end
 
+  create_table "rich_rich_files", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "rich_file_file_name"
+    t.string   "rich_file_content_type"
+    t.integer  "rich_file_file_size"
+    t.datetime "rich_file_updated_at"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.text     "uri_cache"
+    t.string   "simplified_type",        default: "file"
+  end
+
   create_table "solutions", force: true do |t|
     t.text     "code"
     t.integer  "length",       default: 0
@@ -534,6 +544,12 @@ ActiveRecord::Schema.define(version: 20140617132031) do
     t.integer  "topic_id"
     t.integer  "owner_id"
     t.string   "owner_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "universities", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
