@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715181726) do
+ActiveRecord::Schema.define(version: 20140715185509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,11 +168,12 @@ ActiveRecord::Schema.define(version: 20140715181726) do
     t.integer  "year"
     t.integer  "semester"
     t.text     "description"
-    t.boolean  "visible",     default: false
-    t.boolean  "incomplete",  default: true
+    t.boolean  "visible",       default: false
+    t.boolean  "incomplete",    default: true
     t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "university_id"
   end
 
   create_table "courses_lecturers", id: false, force: true do |t|
