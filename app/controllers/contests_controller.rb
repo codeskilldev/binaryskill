@@ -179,7 +179,7 @@ class ContestsController < ApplicationController
 		end
 		@problems = Cproblem.all
 		courseContests = @contest.course.contests
-		courseContests.each do |contest|
+		courseContests.includes(:problems).each do |contest|
 			@problems = @problems - contest.problems
 		end
 	end
