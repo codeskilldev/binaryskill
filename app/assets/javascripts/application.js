@@ -21,8 +21,7 @@
 //= require alertify
 //= require cocoon
 //= require bootstrap
-//= require bootstrap-wysihtml5/b3
-//= require bootstrap-wysihtml5/locales
+//= require bootstrap-wysihtml5
 //= require helper
 //= require tabs
 //= require utilities
