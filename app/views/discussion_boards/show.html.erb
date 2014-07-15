@@ -23,7 +23,7 @@
 			</div>
 			<% if !@discussionBoard.blank? %>
 				<div class="container posts">
-					<% @discussionBoard.posts.each do |post| %>
+					<% @discussionBoard.posts.includes(:owner).each do |post| %>
 						<div class="row box">
 							<div class="well col-sm-1 col_1">
 								<%= image_tag @current_user.profile_image_url.to_s, class:"profile_image" %> 
