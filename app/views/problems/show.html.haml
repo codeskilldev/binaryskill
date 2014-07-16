@@ -1,0 +1,37 @@
+- if student_signed_in?
+	= javascript_include_tag "problems/problems", "facebook"
+.left-box
+	.xob
+		.course_info.panel-body
+			.row.c_title
+				.course_code= @course.code
+				.course_name
+					= link_to @course.name, @course, style: "color: grey"
+			.row
+				.course_sem
+					Semester #{@course.semester}
+					Class #{@course.year}
+			.row.c_title
+				.course_code
+					= link_to @topic.title, {controller: 'topics', action: 'show', id: @topic.id},  style: "color: gray"
+					|
+				.course_code
+					= link_to @track.title, {controller: 'tracks',          |
+						action: 'show', id: @track.id},  style: "color: gray" |
+		%br/
+		%br/
+		#fb-root
+		.problem
+			- if student_signed_in?
+				%img.fb-button{onclick: "openBackWindow('/facebook', 'Facebook')", src: "/assets/facebooksharebutton.png", style: "float: right; width: 32px; height: 32px;", title: "Ask Facebook"}/
+			.problem_title
+				%label= @problem.title
+			%br/
+			%br/
+			.problem_desc
+				= @problem.description
+			%br/
+			%br/
+			= render partial: "solutions/test_cases_time_limit"
+			- if student_signed_in?
+				= render partial: "problem_body"

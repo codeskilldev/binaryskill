@@ -1,0 +1,34 @@
+%table{width: "100%"}
+	%tr
+		%td{width: "80%"}
+			- track_progess = TrackProgression.get_progress(current_student,
+				@problem.track.topic)
+			- if track_progess >= @problem.track.difficulty
+				= render partial: "solutions/timer"
+				= render partial: "solutions/new"
+				%td{style: "vertical-align:top;"}
+					%div{style: "margin-left:1em;"}
+						%b Memory Contents:
+						#memory.fixed-dimensions
+							%table.table.table-striped.table-bordered.table-condensed.table-hover{border: "3"}
+								%tr.info
+									%th Variable
+									%th Value
+						%br/
+						#stack.fixed-dimensions
+						%br/
+						%br/
+						%button#tip.btn.btn-info{"data-placement" => "left", "data-toggle" => "tooltip", title: "Appears based on number of submissions", type: "button"}
+							Hints
+						%br/
+						%br/
+						%br/
+						%br/
+						= render partial: "hints/give"
+						%br/
+						%br/
+						%button#tip.btn.btn-info{"data-placement" => "left", "data-toggle" => "tooltip", title: "Appears based on the time counter", type: "button"}
+							Tips
+						%br/
+						%br/
+						= render partial: "tips/give"
