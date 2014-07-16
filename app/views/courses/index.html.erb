@@ -10,7 +10,7 @@
 	<div class="well">
 		<% if @courses.any? %>
 			<div class="row">
-				<% @courses.each do |course| %>
+				<% @courses.includes(:discussion_board).each do |course| %>
 					<div class="container col-sm-6">
 						<div class="well course-box" style="background-color: #D7DDE2 !important;">
 							<h3><%= link_to course.name, course %><hr></h3>

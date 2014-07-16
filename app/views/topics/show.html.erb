@@ -41,7 +41,7 @@
 		<% hash = hash.to_h %>
 		<% openable = true %>
 		<div class="panel-group list-group" id="accordion">
-			<% @tracks.each do |track| 
+			<% @tracks.includes(:topic, :problems).each do |track| 
 				unless track.visible_for current_student, current_lecturer, 
 						current_teaching_assistant
 					next

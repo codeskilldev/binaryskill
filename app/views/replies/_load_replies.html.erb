@@ -1,7 +1,7 @@
 <div class="container raplies">
 	<% unless @replies.blank? %>
 		<div class="row well main_row" >
-			<% @replies.each do |reply| %>
+			<% @replies.includes(:owner).each do |reply| %>
 			<!-- Start of the row -->
 				<div class="row reply", id="reply_<%=reply.id%>" >
 				<!-- First Col -->
