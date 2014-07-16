@@ -40,7 +40,7 @@ status = "The debugging session was successful."
 				return
 			variables = data["data"]
 			status = data["status"]
-			alert status
+			# alert status
 			toggleDebug(1)
 			debug_console()
 			jump_state 0
@@ -245,9 +245,9 @@ debug_console = ->
 	editor = get_editor()
 	editor.setReadOnly(state)
 	if state == 1
-		$('table .toggable').css("display", "table-cell")
+		$('table .cell-hide').removeClass('cell-hide').addClass('cell-show')
 	else
-		$('table .toggable').hide()
+		$('table .cell-show').removeClass('cell-show').addClass('cell-hide')
 	return
 
 # [Execute Line By Line - Story 3.8]
@@ -312,7 +312,7 @@ debug_console = ->
 @update_memory_contents = (state_number) ->
 	div = document.getElementById("memory")
 	list_of_variables = variables[state_number]["locals"]
-	content = '<table class="table table-striped table-bordered table-condensed table-hover" border="3">'
+	content = '<table class="table table-striped table-bordered table-condensed table-hover fixed-dimensions" border="3">'
 	content += "<tr class='info'><th>Variable</th><th>Value</th></tr>"
 	globals = ""
 	global = "global"
@@ -329,7 +329,7 @@ debug_console = ->
 		i++
 	content += "</table>"
 	if globals.length > 0
-		append = '<table class="table table-striped table-bordered table-condensed table-hover" border="3">'
+		append = '<table class="table table-striped table-bordered table-condensed table-hover fixed-dimensions" border="3">'
 		append += "<tr class='info'><th>Variable</th><th>Value</th></tr>"
 		globals = append + globals
 		globals += "</table>"
@@ -346,7 +346,7 @@ debug_console = ->
 @update_stack_trace = (state_number) ->
 	div = document.getElementById("stack")
 	list_of_methods = variables[state_number]["stack"]
-	content = '<table class="table table-striped table-bordered table-condensed table-hover" border="3">'
+	content = '<table class="table table-striped table-bordered table-condensed table-hover fixed-dimensions" border="3">'
 	content += "<tr class='info'><th>Stack Trace</th></tr>"
 	i = 0
 	while i < list_of_methods.length
@@ -515,3 +515,10 @@ get_editor_session = ->
 get_lang = ->
 	mode = get_editor_session().getMode()["$id"]
 	mode.substring(mode.lastIndexOf("/") + 1)
+
+@toggle_debug_info = ->
+	if $('table .cell-hide').length > 0
+		$('table .cell-hide').removeClass('cell-hide').addClass('cell-show')
+	else
+		$('table .cell-show').removeClass('cell-show').addClass('cell-hide')
+	return

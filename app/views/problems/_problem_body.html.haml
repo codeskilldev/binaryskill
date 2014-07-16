@@ -1,18 +1,15 @@
 %table{width: "100%"}
-	%th{style: "display:none;", class: "toggable"} Memory Contents:
-	%th= render partial: "solutions/timer"
 	%tr
-		%td{width: "20%", style: "vertical-align:top; display:none;", class: "toggable"}
+		%th.cell-hide Memory Contents:
+		%th= render partial: "solutions/timer"
+	%tr
+		%td.cell-hide{width: "20%", style: "vertical-align:top;"}
 			%div
-				#memory.fixed-dimensions
-					%table.table.table-striped.table-bordered.table-condensed.table-hover{border: "3"}
-						%tr.info
-							%th Variable
-							%th Value
-				%br/
-				#stack.fixed-dimensions
-				%br/
-				%br/
+				#memory
+				%br
+				#stack
+				%br
+				%br
 				%button#tip.btn.btn-info{"data-placement" => "left", "data-toggle" => "tooltip", title: "Appears based on number of submissions", type: "button"}
 					Hints
 				%br/

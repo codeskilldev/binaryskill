@@ -10,12 +10,16 @@
 
 		<!-- <div style="float:left; margin:5px;"> -->
 			<img src="/assets/run_w.png" id='testButton' onClick= "run_input(<%=params[:id]%>, 'Problem')" class="solution-bar" style= "cursor:pointer;" title="Run Test Case" ></img>
+					
 		<!-- </div> -->
 
 		<!-- <div style="float:left; margin:5px;"> -->
+		<div class="btn-group">
 			<img src="/assets/debug_w.png" id='debugButton' onClick= "start_debug(<%=params[:id]%>, 'Problem')" class="solution-bar" style= "cursor:pointer;" title="Start Debugging" ></img>
+			<span class="glyphicon glyphicon-eject"style= "cursor:pointer;"
+			onclick="toggle_debug_info()"></span>
 		<!-- </div> -->
-		
+		</div>
 		
 		<!-- <div style="float:left; margin:5px; margin-left:-25px;"> -->
 			<img src="/assets/previous_w.png" id='previousButton' onClick= "previous()"

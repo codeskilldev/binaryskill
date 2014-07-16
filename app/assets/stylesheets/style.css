@@ -3,7 +3,7 @@
 .cont {
 	background: #eeefe9;
 	width: 90% !important;
-	padding-top:100px;
+	padding-top:50px;
 }
 .right_side {
 
@@ -244,4 +244,12 @@
 
 .delete a {
 	color: white;
+}
+
+table .cell-hide{
+	display: none;
+}
+
+table .cell-show{
+	display: table-cell;
 }

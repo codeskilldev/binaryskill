@@ -2448,6 +2448,9 @@ input[type="button"].btn-block {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.glyphicon:hover, .glyphicon:focus{
+  color: #ffffff
+}
 .glyphicon-asterisk:before {
   content: "\2a";
 }

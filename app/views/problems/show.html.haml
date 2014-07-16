@@ -16,23 +16,21 @@
 					= link_to @topic.title, {controller: 'topics', action: 'show', id: @topic.id},  style: "color: gray"
 					|
 				.course_code
-					= link_to @track.title, {controller: 'tracks',          |
-						action: 'show', id: @track.id},  style: "color: gray" |
-		%br/
-		%br/
-		#fb-root
+					= link_to @track.title, {controller: 'tracks',
+						action: 'show', id: @track.id},  style: "color: gray"
+				- if student_signed_in?
+					%img.fb-button{onclick: "openBackWindow('/facebook', 'Facebook')", src: "/assets/facebooksharebutton.png", style: "float: right; width: 32px; height: 32px;", title: "Ask Facebook"}/
+				.problem_title
+					%span.glyphicon.glyphicon-exclamation-sign{style: "cursor:pointer;", onclick: "toggle_description();"}
+					%label= @problem.title
+		%br
+		%br
 		.problem
-			- if student_signed_in?
-				%img.fb-button{onclick: "openBackWindow('/facebook', 'Facebook')", src: "/assets/facebooksharebutton.png", style: "float: right; width: 32px; height: 32px;", title: "Ask Facebook"}/
-			.problem_title
-				%label= @problem.title
-			%br/
-			%br/
-			.problem_desc
+			.problem_desc.panel-collapse.collapse
 				= @problem.description
-			%br/
-			%br/
-			= render partial: "solutions/test_cases_time_limit"
+				%br/
+				%br/
+				= render partial: "solutions/test_cases_time_limit"
 			- if student_signed_in?
 				- track_progess = TrackProgression.get_progress(current_student,
 					@problem.track.topic)
