@@ -29,10 +29,18 @@
 			<div class="panel-group">
 	  			<div class="panel panel-default">
 					<% if next_problems_to_solve != nil then %>
-							<div class="panel-heading icon glyphicon glyphicon-chevron-right"
-							data-toggle="collapse" data-parent="#accordion" href="#Nextproblems">
+					<table class="table">
+						<tr>
+							<td>
+								<div class="panel-heading icon glyphicon glyphicon-chevron-right" data-toggle="collapse" data-parent="#accordion" href="#Nextproblems">
+								</div>
+								</div>
+							</td>
+							<td>
 								Next problems to solve
-							</div>
+							</td>
+						</tr>
+					</table>
 							<div id="Nextproblems" class="panel-collapse collapse">
 								<div class="panel-body">
 									<% next_problems_to_solve.each do |key , value| %>
@@ -66,11 +74,19 @@
 				<div class="panel panel-default">
 					<% recommended_problems = current_student.getClassMatesRecommendations 
 					if recommended_problems != nil then %>
-						<div class="panel-heading icon glyphicon glyphicon-chevron-right"
-							data-toggle="collapse" data-parent="#accordion"
-							href="#ClassmateRecommendations">
-							Classmates Recommendations
-						</div>
+					<table class="table">
+						<tr>
+							<td>
+								<div class="panel-heading icon glyphicon glyphicon-chevron-right"
+									data-toggle="collapse" data-parent="#accordion"
+									href="#ClassmateRecommendations">
+								</div>
+							</td>
+							<td>
+								Classmates Recommendations
+							</td>
+						</tr>
+					</table>
 						<div id="ClassmateRecommendations" class="panel-collapse collapse">
 							<div class="panel-body">
 								<% recommended_problems.each do |key , value| %>
@@ -96,10 +112,17 @@
 		<div class="right_side list-group table">
 			<div class="panel-group">
 				<div class="panel panel-default">
-					<div class="panel-heading icon glyphicon glyphicon-chevron-right"
-					data-toggle="collapse" data-parent="#accordion" href="#SystemRecommendation">
-						System Recommendations
-					</div>
+					<table class="table">
+						<tr>
+							<td>
+								<div class="panel-heading icon glyphicon glyphicon-chevron-right pull-left" data-toggle="collapse" data-parent="#accordion" href="#SystemRecommendation">
+								</div>
+							</td>
+							<td>
+								System Recommendations
+							</td>
+						</tr>
+					</table>
 					<div id="SystemRecommendation" class="panel-collapse collapse">
 						<div class="panel-body">
 							<div class="list-group-item">
