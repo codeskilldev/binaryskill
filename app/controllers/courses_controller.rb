@@ -14,41 +14,6 @@ class CoursesController < ApplicationController
 	#	@lecturer: The chosen lecturer
 	# Author: Ahmed Moataz
 	def sign_up
-		# @status = params[:status]
-		# if student_signed_in?
-		# 	case params[:status]
-		# 	when nil
-		# 		@courses = Course.select(:university).distinct
-		# 		@status = "1"
-		# 	when "2"
-		# 		@courses = Course.where(university: params[:university]).
-		# 			select(:semester).distinct
-		# 	when "3"
-		# 		@courses = Course.where(semester: params[:semester],
-		# 			university: params[:university])
-		# 	when "4"
-		# 		@course = Course.find(params[:id])
-		# 	when "5"
-		# 		@course = Course.find(params[:id])
-		# 		@lecturer = Lecturer.find(params[:lecturer])
-		# 	when "6"
-		# 		@course = Course.find(params[:id])
-		# 		@lecturer = Lecturer.find(params[:lecturer])
-		# 		student = Student.find(current_student.id)
-		# 		if student.courses.find_by_id(@course.id) == nil
-		# 			student.courses << @course
-		# 			Notification.lecturer_notify(@lecturer.id, @course.id, student.id)
-		# 			@course.topics.each do |topic|
-		# 				progress = TrackProgression.create(level: 0, topic_id: topic.id)
-		# 				student.progressions << progress
-		# 			end
-		# 		else
-		# 			@status = "7"
-		# 		end
-		# 	end
-		# else
-		# 	@status = "0"
-		# end
 		@universities = University.all
 	end
 
@@ -72,8 +37,7 @@ class CoursesController < ApplicationController
 			end
 			session[:university] = params[:university]
 		elsif params[:semester]
-			list = University.find(session[:university]).courses.where(:semester => params[:semester])
-			# list = 
+			list = University.find(session[:university]).courses.where(:semester => params[:semester]) - current_student.courses
 		elsif params[:course]
 			list = Course.find(params[:course]).lecturers
 		end
