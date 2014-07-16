@@ -1,15 +1,16 @@
 <%= javascript_include_tag('courses') %>
+
 <%= form_for(:course_registeration, :url => {:action => :register}) do |f| %>
-<%=	f.label(:University) %> <br>
-<%= select_tag "course_registration[university]", print_options(@universities).html_safe,
-	:onchange => "add_options('university', this.value)"  %> <br>
-<%= f.label(:semester) %> <br>
-<%= select_tag "course_registration[semester]", "<option>select semester</option>", 
-	:onchange => "add_options('semester', this.value)" , disabled: true %> <br>
-<%= f.label(:Course) %> <br>
-<%= select_tag "course_registration[course]", print_options(@universities.first.courses).html_safe, 
-	:onchange => "add_options('course', this.value)", disabled: true%>  <br>
-<%= f.label(:Lecturer) %> <br>
-<%= select_tag "course_registration[lecturer]", "<option>select lecturer</option>".html_safe, disabled: true %> <br>
-<%=	submit_tag "Submit", id: "foo-submit", disable_with: "Please wait..."  %>
+	<%=	f.label(:University) %> <br>
+	<%= select_tag "course_registration[university]", print_options(@universities).html_safe,
+		:onchange => "add_options('university', this.value)"  %> <br>
+	<%= f.label(:semester) %> <br>
+	<%= select_tag "course_registration[semester]", "<option>select semester</option>", 
+		:onchange => "add_options('semester', this.value)" , disabled: true %> <br>
+	<%= f.label(:Course) %> <br>
+	<%= select_tag "course_registration[course]", print_options(@universities.first.courses).html_safe, 
+		:onchange => "add_options('course', this.value)", disabled: true%>  <br>
+	<%= f.label(:Lecturer) %> <br>
+	<%= select_tag "course_registration[lecturer]", "<option>select lecturer</option>".html_safe, disabled: true %> <br>
+	<%=	submit_tag "Submit", id: "foo-submit", disable_with: "Please wait..."  %>
 <%	end %>

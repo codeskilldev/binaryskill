@@ -28,7 +28,11 @@ rerun.txt
 pickle-email-*.html
 /config/secrets.yml
 
-# These should all be checked in to normalise the environment:
+-# Ignoring migrations
+db/migrate/*.rb
+
+-# These should all be checked in to normalise the environment:
+
 Gemfile.lock, .ruby-version, .ruby-gemset
 
 # Ignoring generated model diagram

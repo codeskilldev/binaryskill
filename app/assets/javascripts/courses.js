@@ -148,7 +148,6 @@ function add_options(key, value){
 		success: function(json){
 			populate_list(json, key)
 		} 
-
 	})
 }
 function populate_list(data, key){

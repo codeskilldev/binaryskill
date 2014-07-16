@@ -18,10 +18,11 @@ class CoursesController < ApplicationController
 	end
 
 	def register
-		course_registration = params.require(:course_registration).permit(:course, :lecturer, :student, :topic_id)
+		course_registration = permit_params
 		course = Course.find(course_registration[:course])
 		current_student.courses << course
-		Notification.lecturer_notify(course_registration[:lecturer], course_registration[:course], current_student)
+		Notification.lecturer_notify(course_registration[:lecturer],
+			course_registration[:course], current_student)
 		course.topics.each do |topic|
 			progress = TrackProgression.create(level: 0, topic_id: topic.id)
 			current_student.progressions << progress
@@ -37,7 +38,8 @@ class CoursesController < ApplicationController
 			end
 			session[:university] = params[:university]
 		elsif params[:semester]
-			list = University.find(session[:university]).courses.where(:semester => params[:semester]) - current_student.courses
+			list = University.find(session[:university]).courses.where(:semester => params[:semester])
+			list -= current_student.courses
 		elsif params[:course]
 			list = Course.find(params[:course]).lecturers
 		end
@@ -345,6 +347,10 @@ class CoursesController < ApplicationController
 			else
 				return false
 			end
+		end
+
+		def permit_params
+			params.require(:course_registration).permit(:course, :lecturer, :student, :topic_id)
 		end
 
 end
