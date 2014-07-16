@@ -1,9 +1,10 @@
 - if student_signed_in?
-	= javascript_include_tag "problems/problems", "facebook"
+	- content_for :javascripts do
+		= javascript_include_tag "problems/problems", "facebook"
 - content_for :title do
 	= @problem.title
 .left-box
-	.xoz
+	.xob
 		.course_info.panel-body
 			.row.c_title
 				.course_code= @course.code
@@ -23,18 +24,21 @@
 				- if student_signed_in?
 					%img.fb-button{onclick: "openBackWindow('/facebook', 'Facebook')", src: "/assets/facebooksharebutton.png", style: "float: right; width: 32px; height: 32px;", title: "Ask Facebook"}/
 				.problem_title
-					%span.glyphicon.glyphicon-exclamation-sign{style: "cursor:pointer;", onclick: "toggle_description();"}
 					%label= @problem.title
 		%br
 		%br
 		.problem
-			.problem_desc.panel-collapse.collapse
+			.problem_desc
 				= @problem.description
 				%br/
 				%br/
 				= render partial: "solutions/test_cases_time_limit"
-			- if student_signed_in?
-				- track_progess = TrackProgression.get_progress(current_student,
-					@problem.track.topic)
-				- if track_progess >= @problem.track.difficulty
-					= render partial: "problem_body"
+				%div{align: 'center', style: 'cursor:pointer;', onclick: 'toggle_problem_page();'} Code
+
+= content_for :problem_body do
+	%section.xoz.problem-body.hide
+		- if student_signed_in?
+			- track_progess = TrackProgression.get_progress(current_student,
+				@problem.track.topic)
+			- if track_progess >= @problem.track.difficulty
+				= render partial: "problem_body"

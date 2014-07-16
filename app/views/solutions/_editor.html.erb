@@ -2,6 +2,7 @@
 
 <div>
 	<!-- <div style="margin-left:5px; margin-top:5px; float:left;"> -->
+	<div class="">
 		
 		<!-- <div style="float:left; margin-right:10px; margin-top:3px;"> -->
 			<img src="/assets/lang_w.png" class="solution-editor"></img>
@@ -40,15 +41,35 @@
 			<img src="/assets/decrease_font_w.png" onClick="decreaseFont()" class="solution-editor"
 				style="cursor:pointer;" title="Decrease Font"></img>
 		<!-- </div> -->
-	<!-- </div> -->
+	</div>
 	<%= hidden_field :problem, :default_code, value: @snippet %>
 	<%= hidden_field :problem, :student_code, value: @st_snippet %>
 	<!-- <br><br><br> -->
-
-	<!-- Add editor -->
-	<!-- <div style="margin-top:-10px;"> -->
-	<pre id="editor"></pre>
-	<!-- </div> -->
+	<div class="row">
+		<div class='col-sm-2 cell-hide'>
+			<%= render partial: "memory" %>
+		</div>
+		<div class='col-sm-12'>
+			<!-- Add editor -->
+			<!-- <div style="margin-top:-10px;"> -->
+			<pre id="editor"></pre>
+			<!-- </div> -->
+			<div class="row">
+				<div class="col-sm-6" style="color:rgb(248,248,248); margin-bottom:1px;">
+					<b>Input:</b>
+				</div>
+				<div class="col-sm-6" style="color:rgb(248,248,248);">Console:</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<%= render partial: "solutions/input_box" %>
+				</div>
+				<div class="col-sm-6" >
+					<%= render partial: "solutions/console" %>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 

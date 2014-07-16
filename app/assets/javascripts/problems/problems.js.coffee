@@ -45,10 +45,6 @@ activate = ->
 		time = setInterval(timer, 1000)
 		timer
 
-@toggle_description = ->
-	$('.problem_desc').collapse('toggle')
-	return
-
 # [Design - Story Design]
 # Start counter if the two labels with ids "mins" and "secs" exists
 # Parameters: none

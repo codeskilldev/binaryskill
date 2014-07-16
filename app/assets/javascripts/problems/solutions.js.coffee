@@ -245,9 +245,11 @@ debug_console = ->
 	editor = get_editor()
 	editor.setReadOnly(state)
 	if state == 1
-		$('table .cell-hide').removeClass('cell-hide').addClass('cell-show')
+		$('.cell-hide').removeClass('cell-hide').addClass('cell-show')
+		$('div.row div.col-sm-12').removeClass('col-sm-12').addClass('col-sm-10')
 	else
-		$('table .cell-show').removeClass('cell-show').addClass('cell-hide')
+		$('.cell-show').removeClass('cell-show').addClass('cell-hide')
+		$('div.row div.col-sm-10').removeClass('col-sm-10').addClass('col-sm-12')
 	return
 
 # [Execute Line By Line - Story 3.8]
@@ -517,8 +519,22 @@ get_lang = ->
 	mode.substring(mode.lastIndexOf("/") + 1)
 
 @toggle_debug_info = ->
-	if $('table .cell-hide').length > 0
-		$('table .cell-hide').removeClass('cell-hide').addClass('cell-show')
+	if $('.cell-hide').length > 0
+		$('.cell-hide').removeClass('cell-hide').addClass('cell-show')
+		$('div.row div.col-sm-12').removeClass('col-sm-12').addClass('col-sm-10')
 	else
-		$('table .cell-show').removeClass('cell-show').addClass('cell-hide')
+		$('.cell-show').removeClass('cell-show').addClass('cell-hide')
+		$('div.row div.col-sm-10').removeClass('col-sm-10').addClass('col-sm-12')
 	return
+
+@toggle_problem_page = ->
+	if $('div#page_id.page_class.hide').length > 0
+		# Show Problem Page and Hide Code Page
+		$('body').css('background', '#EEEFE9')
+		$('div#page_id.page_class').removeClass('hide').addClass('show')
+		$('section.problem-body.hide').removeClass('show').addClass('hide')
+	else
+		# Hide Problem Page and Show Code Page
+		$('body').css('background', '#232323')
+		$('div#page_id.page_class').removeClass('show').addClass('hide')
+		$('section.problem-body').removeClass('hide').addClass('show')

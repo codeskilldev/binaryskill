@@ -37,7 +37,7 @@ textarea  {
     right: 0;
     top: 0;
     bottom: 0;
-    height: 20pc;
+    height: 23.5pc;
 }
 
 .fixed-content {
@@ -190,4 +190,12 @@ img.solution-bar{
 	height: 26px;
 	width: 26px;
 	vertical-align: middle;
+}
+
+section.problem-body.show, div#page-footer.show, div#page-header.show, div#page-right.show, div.xob.problem-info.show, div#page-left.show{
+	display: block;
+}
+
+section.problem-body.hide, div#page-footer.hide, div#page-header.hide, div#page-right.hide, div.xob.problem-info.hide, div#page-left.hide{
+	display: none;
 }

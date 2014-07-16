@@ -1,0 +1,12 @@
+<% if signed_in? %>
+	<div id="page-left" class="container cont">
+		<div class="col-md-10 left_side">
+			<%= yield %>
+		</div>
+		<%= render "layouts/right_side_bar" %>
+	</div>
+<% else %>
+	<div class="row" style="background: #eeefe9;">
+			<%= yield %>
+	</div> 
+<% end %>

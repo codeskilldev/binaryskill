@@ -193,10 +193,11 @@
 }
 
 .xoz {
+	height: 100%;
+	width: 100%;
+	/*position: absolute;*/
 	padding: 0px 20px 20px;
 	border-radius: 5px;
-	background-color: #232323;
-
 }
 
 .xox {
@@ -254,10 +255,10 @@
 	color: white;
 }
 
-table .cell-hide{
+.cell-hide{
 	display: none;
 }
 
-table .cell-show{
+.cell-show{
 	display: table-cell;
 }
