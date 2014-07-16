@@ -76,7 +76,7 @@ class ContestsController < ApplicationController
 			@my_contests = current_student.contests
 			@courses = current_student.courses
 			@contests = []
-			@courses.each do |course|
+			@courses.includes(:contests).each do |course|
 				course.contests.each do |contest|
 					unless @my_contests.exists?(contest.id)
 						@contests << contest
@@ -179,7 +179,7 @@ class ContestsController < ApplicationController
 		end
 		@problems = Cproblem.all
 		courseContests = @contest.course.contests
-		courseContests.each do |contest|
+		courseContests.includes(:problems).each do |contest|
 			@problems = @problems - contest.problems
 		end
 	end

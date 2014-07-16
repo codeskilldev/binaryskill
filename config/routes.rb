@@ -73,10 +73,6 @@ Tutor::Application.routes.draw do
 	post "model_answers/new"
 
 	resources :model_answers
-	#resources :test_cases
-	#devise_for :teaching_assistants
-	#devise_for :students
-	#devise_for :lecturers
 
 	# Example of regular route:
 	#   get 'products/:id' => 'catalog#view'
