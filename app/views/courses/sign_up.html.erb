@@ -11,6 +11,6 @@
 	<%= select_tag "course_registration[course]", print_options(@universities.first.courses).html_safe, 
 		:onchange => "add_options('course', this.value)", disabled: true%>  <br>
 	<%= f.label(:Lecturer) %> <br>
-	<%= select_tag "course_registration[lecturer]", "<option>select lecturer</option>".html_safe, disabled: true %> <br>
-	<%=	submit_tag "Submit", id: "foo-submit", disable_with: "Please wait..."  %>
+	<%= select_tag "course_registration[lecturer]", "<option>select lecturer</option>".html_safe, onchange: "disable_element('form_submit', false)", disabled: true %> <br>
+	<%=	submit_tag "Submit", id: "form_submit", disable_with: "Please wait...", disabled: true, :class => "btn btn-default"  %>
 <%	end %>

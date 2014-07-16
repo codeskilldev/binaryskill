@@ -140,30 +140,49 @@ function acknowledge(courseid){
 	});
 }
 
-function add_options(key, value){
-	$.ajax({
-		type: "GET",
-		url: '/courses/return_list?'+ key + "=" + value ,
-		datatype: 'json',
-		success: function(json){
-			populate_list(json, key)
-		} 
-	})
+function disable_element(id, bool= true){
+	$('#'+id).prop("disabled", bool);
 }
+
+// [Edit Course Sign Up]
+// Sends request for data to populate form drop-down lists
+// Parameters:
+// 	key: label of drop-downlist, example: university
+// 	value: value selected by user for th previous key, example: 'GUC'
+// Author: Mohab Ghanim
+function add_options(key, value){
+	if (value != ""){
+		$.ajax({
+			type: "GET",
+			url: '/courses/return_list?'+ key + "=" + value ,
+			datatype: 'json',
+			success: function(json){
+				populate_list(json, key)
+			} 
+		})
+	}
+}
+
+// [Edit Course Sign Up]
+// Fills drop-down list with data recieved from ajax request
+// Parameters:
+// 	data: data recieved from request
+// 	key: label of drop-downlist, example: university
+// Author: Mohab Ghanim
 function populate_list(data, key){
 	var element;
 	if (key == "university"){
 		element = $("#course_registration_semester");
-		key = "semester";
 		$("#course_registration_course").val(" ");
 		$("#course_registration_lecturer").val(" ");
+		$("#form_submit").prop("disabled", true);
 	}else if (key == "semester") {
 		element = $("#course_registration_course");
 		$("#course_registration_lecturer").val(" ");
-		key = "course";
+		$("#form_submit").prop("disabled", true);
 	}else if (key == "course"){
 		element = $("#course_registration_lecturer");
-		key = "lecture";
+		$("#form_submit").prop("disabled", true);
 	}
 	if (element) {
 		element.html("");
