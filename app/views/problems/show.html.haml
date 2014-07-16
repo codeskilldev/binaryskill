@@ -34,4 +34,7 @@
 			%br/
 			= render partial: "solutions/test_cases_time_limit"
 			- if student_signed_in?
-				= render partial: "problem_body"
+				- track_progess = TrackProgression.get_progress(current_student,
+					@problem.track.topic)
+				- if track_progess >= @problem.track.difficulty
+					= render partial: "problem_body"
