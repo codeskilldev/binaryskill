@@ -244,7 +244,11 @@ debug_console = ->
 	$('#stopButton').toggle(state)
 	editor = get_editor()
 	editor.setReadOnly(state)
-
+	if state == 1
+		$('table .toggable').css("display", "table-cell")
+	else
+		$('table .toggable').hide()
+	return
 
 # [Execute Line By Line - Story 3.8]
 # Moves to the next state of execution.

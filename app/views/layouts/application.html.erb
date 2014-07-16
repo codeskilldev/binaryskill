@@ -64,12 +64,17 @@
 		</div>
 		<% if signed_in? %>
 			<div class="container cont">
-				<div class="col-md-10 left_side">
+				<% if params[:controller].include?("problem") &&
+					params[:action] == "show" %>
 					<%= yield %>
-				</div>
-				<div class="col-xs-hidden col-md-2 right_side">
+				<% else %>
+					<div class="col-md-10 left_side">
+						<%= yield %>
+					</div>
+					<div class="col-xs-hidden col-md-2 right_side">
 						<%= render "layouts/right_side_bar" %>
-				</div>
+					</div>
+				<% end %>
 			</div>
 		<% else %>
 			<div class="row" style="background: #eeefe9;">

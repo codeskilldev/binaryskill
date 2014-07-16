@@ -1,8 +1,9 @@
 %table{width: "100%"}
+	%th{style: "display:none;", class: "toggable"} Memory Contents:
+	%th= render partial: "solutions/timer"
 	%tr
-		%td{width: "20%", style: "vertical-align:top;"}
-			%div{style: "margin-left:1em;"}
-				%b Memory Contents:
+		%td{width: "20%", style: "vertical-align:top; display:none;", class: "toggable"}
+			%div
 				#memory.fixed-dimensions
 					%table.table.table-striped.table-bordered.table-condensed.table-hover{border: "3"}
 						%tr.info
@@ -26,6 +27,4 @@
 				%br/
 				%br/
 				= render partial: "tips/give"
-		%td{width: "80%"}
-			= render partial: "solutions/timer"
-			= render partial: "solutions/new"
+		%td= render partial: "solutions/new"
