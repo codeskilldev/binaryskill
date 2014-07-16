@@ -187,7 +187,15 @@
 	margin-bottom: 20px;
 	border-radius: 5px;
 	background-color: #FAFAFA;
+	/*background-color: #232323;*/
 	margin-right: 2%;
+
+}
+
+.xoz {
+	padding: 0px 20px 20px;
+	border-radius: 5px;
+	background-color: #232323;
 
 }
 

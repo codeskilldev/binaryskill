@@ -1,7 +1,9 @@
 - if student_signed_in?
 	= javascript_include_tag "problems/problems", "facebook"
+- content_for :title do
+	= @problem.title
 .left-box
-	.xob
+	.xoz
 		.course_info.panel-body
 			.row.c_title
 				.course_code= @course.code
