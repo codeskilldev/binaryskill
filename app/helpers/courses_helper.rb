@@ -12,4 +12,14 @@ module CoursesHelper
 		end
 		return s.slice(0, i) + '...' 
 	end
+
+
+	def print_options(list)
+		result = "<option></option>"
+		list.each do |u|
+			result += "<option value=#{u.id}>#{u.name}</option>"
+		end
+		return result
+	end
+
 end

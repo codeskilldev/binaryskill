@@ -31,9 +31,10 @@ Tutor::Application.routes.draw do
 	get 'contests/:id/register' => 'contests#register'
 	post 'contests/add/:id' => 'contests#add'
 	get 'problems/edit'
-
+	get '/courses/return_list' => 'courses#return_list'
 	get 'c_problems/new'
 	post 'c_problems/create'
+	post '/courses/register' => 'courses#register'
 
 	get "tips/new"
 	get "tips/create"
@@ -254,5 +255,5 @@ Tutor::Application.routes.draw do
 	#     # (app/controllers/admin/products_controller.rb)
 	#     resources :products
 	#   end
-
+    match ":controller(/:action(/:id))", :via => :get
 end

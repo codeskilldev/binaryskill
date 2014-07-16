@@ -124,16 +124,16 @@ puts("# ----------------------- Courses ----------------------- ")
 				description:"This is course three", code:3, year:2014, semester:1, link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
 	print "."
 	Course.create(name: "CS 2", 
-				description:"This is course four", code: "cs2", year: 2014, semester: 2, university: "GUC", link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
+				description:"This is course four", code: "cs2", year: 2014, semester: 2, link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
 	print "."
 	Course.create(name: "CS 3", 
-				description:"This is course five", code: "cs3", year: 2014, semester: 3, university: "GUC", link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
+				description:"This is course five", code: "cs3", year: 2014, semester: 3, link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
 	print "."
 	Course.create(name: "CS 4", 
-				description:"This is course six", code: "cs4", year: 2014, semester: 4, university: "AUC", link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
+				description:"This is course six", code: "cs4", year: 2014, semester: 4, link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
 	print "."
 	Course.create(name: "CS 5", 
-				description:"This is course seven", code: "cs5", year: 2014, semester: 5, university: "AUC", link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
+				description:"This is course seven", code: "cs5", year: 2014, semester: 5, link: "http://met.guc.edu.eg/Courses/CourseEdition.aspx?crsEdId=487")
 	print ".\n"
 
 puts("# ----------------------- Course_Student ----------------------- ")
@@ -948,6 +948,13 @@ puts("# ----------------------- Notes ----------------------- ")
 puts("# -----------------------Tags----------------------- ")
 	Tag.create(name: "Java")
 	Tag.create(name: "Python")
+
+puts("# --------------------Universities------------------ ")
+	University.create(:name => "GUC")
+	University.create(:name => "AUC")
+	University.create(:name => "BUC")
+	University.create(:name => "ZUC")
+	University.create(:name => "RUC")
 
 puts("**************************************************************")
 puts("                      Creating Relations                    ")

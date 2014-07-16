@@ -139,3 +139,40 @@ function acknowledge(courseid){
 		}
 	});
 }
+
+function add_options(key, value){
+	$.ajax({
+		type: "GET",
+		url: '/courses/return_list?'+ key + "=" + value ,
+		datatype: 'json',
+		success: function(json){
+			populate_list(json, key)
+		} 
+
+	})
+}
+function populate_list(data, key){
+	var element;
+	if (key == "university"){
+		element = $("#course_registration_semester");
+		key = "semester";
+		$("#course_registration_course").val(" ");
+		$("#course_registration_lecturer").val(" ");
+	}else if (key == "semester") {
+		element = $("#course_registration_course");
+		$("#course_registration_lecturer").val(" ");
+		key = "course";
+	}else if (key == "course"){
+		element = $("#course_registration_lecturer");
+		key = "lecture";
+	}
+	if (element) {
+		element.html("");
+		element.prop("disabled", false);
+		element.append("<option></option>")
+		$.each(data, function(i, list_item){
+			list_item = data[i];
+			element.append("<option value=" + i + ">" + list_item + "</option>")
+		})
+	}
+}
