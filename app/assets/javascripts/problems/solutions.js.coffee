@@ -530,11 +530,15 @@ get_lang = ->
 @toggle_problem_page = ->
 	if $('div#page_id.page_class.hide').length > 0
 		# Show Problem Page and Hide Code Page
+		$('section.problem-body.hide').collapse('hide')
+		# $('section.problem-body.hide').removeClass('show').addClass('hide')
 		$('body').css('background', '#EEEFE9')
-		$('div#page_id.page_class').removeClass('hide').addClass('show')
-		$('section.problem-body.hide').removeClass('show').addClass('hide')
+		$('div#page_id.page_class').collapse('show')
+		# $('div#page_id.page_class').removeClass('hide').addClass('show')
 	else
 		# Hide Problem Page and Show Code Page
+		$('div#page_id.page_class').collapse('hide')
+		# $('div#page_id.page_class').removeClass('show').addClass('hide')
 		$('body').css('background', '#232323')
-		$('div#page_id.page_class').removeClass('show').addClass('hide')
-		$('section.problem-body').removeClass('hide').addClass('show')
+		$('section.problem-body').collapse('show')
+		# $('section.problem-body').removeClass('hide').addClass('show')

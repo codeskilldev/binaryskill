@@ -36,7 +36,7 @@
 				%div{align: 'center', style: 'cursor:pointer;', onclick: 'toggle_problem_page();'} Code
 
 = content_for :problem_body do
-	%section.xoz.problem-body.hide
+	%section.problem-body.panel-collapse.collapse
 		- if student_signed_in?
 			- track_progess = TrackProgression.get_progress(current_student,
 				@problem.track.topic)

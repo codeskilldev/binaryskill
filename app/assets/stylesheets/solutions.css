@@ -192,10 +192,20 @@ img.solution-bar{
 	vertical-align: middle;
 }
 
-section.problem-body.show, div#page-footer.show, div#page-header.show, div#page-right.show, div.xob.problem-info.show, div#page-left.show{
+section.problem-body.show, div#page_id.page_class.show{
 	display: block;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 }
 
-section.problem-body.hide, div#page-footer.hide, div#page-header.hide, div#page-right.hide, div.xob.problem-info.hide, div#page-left.hide{
+section.problem-body.hide, div#page_id.page_class.hide{
 	display: none;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 }

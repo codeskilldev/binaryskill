@@ -25,11 +25,11 @@
 		<%= csrf_meta_tags %>
 		<meta name="viewport" content="width=device-width"/>
 	</head>
-	<body>
+	<body class="gradually-change">
 		<% if student_signed_in? && params[:controller].include?("problem") &&
 			params[:action] == "show" %>
 			<%= yield :problem_body %>
-			<div id="page_id" class="page_class">
+			<div id="page_id" class="page_class panel-collapse collapse in">
 				<%= renders() %>
 			</div>
 		<% else %>
