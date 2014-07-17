@@ -30,15 +30,23 @@
 		.problem
 			.problem_desc
 				= @problem.description
-				%br/
-				%br/
-				= render partial: "solutions/test_cases_time_limit"
-				%div{align: 'center', style: 'cursor:pointer;', onclick: 'toggle_problem_page();'} Code
+				%br
+				%br
+				= render partial: 'solutions/test_cases_time_limit'
 
-= content_for :problem_body do
-	%section.problem-body.panel-collapse.collapse
 		- if student_signed_in?
 			- track_progess = TrackProgression.get_progress(current_student,
 				@problem.track.topic)
 			- if track_progess >= @problem.track.difficulty
-				= render partial: "problem_body"
+				%div{align: 'center', style: 'cursor:pointer;', onclick: 'toggle_problem_page();'} Code
+				= content_for :problem_body do
+					%section.problem-body.panel-collapse.collapse
+						%span.glyphicon.glyphicon-minus.hover{style: 'cursor:pointer;', title: 'Minimize', onclick: 'toggle_problem_page();'}
+						%span#desc.glyphicon.glyphicon-chevron-down.hover{style: 'cursor:pointer;', title: 'toggle problem description', onclick: 'toggle_description();'}
+						.problem.panel-collapse.collapse
+							.problem_desc
+								= @problem.description
+								%br
+								%br
+							= render partial: 'solutions/test_cases_time_limit'
+						= render partial: 'problem_body'

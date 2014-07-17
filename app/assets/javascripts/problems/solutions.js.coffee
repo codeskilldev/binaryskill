@@ -528,17 +528,14 @@ get_lang = ->
 	return
 
 @toggle_problem_page = ->
-	if $('div#page_id.page_class.hide').length > 0
-		# Show Problem Page and Hide Code Page
-		$('section.problem-body.hide').collapse('hide')
-		# $('section.problem-body.hide').removeClass('show').addClass('hide')
-		$('body').css('background', '#EEEFE9')
-		$('div#page_id.page_class').collapse('show')
-		# $('div#page_id.page_class').removeClass('hide').addClass('show')
+	elem = $('span#desc.glyphicon.hover')
+	if $('section div.problem.panel-collapse').hasClass('in')
+		$('section div.problem.panel-collapse').collapse('hide')
+	elem.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
+	$('section.problem-body').collapse('toggle')
+	if $('body').css('background-color') == 'rgb(35, 35, 35)'
+		$('body').css('background-color', '#EEEFE9')
 	else
-		# Hide Problem Page and Show Code Page
-		$('div#page_id.page_class').collapse('hide')
-		# $('div#page_id.page_class').removeClass('show').addClass('hide')
-		$('body').css('background', '#232323')
-		$('section.problem-body').collapse('show')
-		# $('section.problem-body').removeClass('hide').addClass('show')
+		$('body').css('background-color', '#232323')
+	$('div#page_id.page_class').collapse('toggle')
+	return
