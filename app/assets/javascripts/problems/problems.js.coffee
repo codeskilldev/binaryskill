@@ -45,6 +45,16 @@ activate = ->
 		time = setInterval(timer, 1000)
 		timer
 
+@toggle_description = ->
+	elem = $('span#desc.glyphicon.hover')
+	if elem.hasClass('glyphicon-chevron-up')
+		$('section div.problem.panel-collapse').collapse('hide')
+		elem.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
+	else
+		$('section div.problem.panel-collapse').collapse('show')
+		elem.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
+	return
+
 # [Design - Story Design]
 # Start counter if the two labels with ids "mins" and "secs" exists
 # Parameters: none

@@ -40,7 +40,7 @@ status = "The debugging session was successful."
 				return
 			variables = data["data"]
 			status = data["status"]
-			alert status
+			# alert status
 			toggleDebug(1)
 			debug_console()
 			jump_state 0
@@ -244,7 +244,13 @@ debug_console = ->
 	$('#stopButton').toggle(state)
 	editor = get_editor()
 	editor.setReadOnly(state)
-
+	if state == 1
+		$('.cell-hide').removeClass('cell-hide').addClass('cell-show')
+		$('div.row div.col-sm-12').removeClass('col-sm-12').addClass('col-sm-10')
+	else
+		$('.cell-show').removeClass('cell-show').addClass('cell-hide')
+		$('div.row div.col-sm-10').removeClass('col-sm-10').addClass('col-sm-12')
+	return
 
 # [Execute Line By Line - Story 3.8]
 # Moves to the next state of execution.
@@ -308,7 +314,7 @@ debug_console = ->
 @update_memory_contents = (state_number) ->
 	div = document.getElementById("memory")
 	list_of_variables = variables[state_number]["locals"]
-	content = '<table class="table table-striped table-bordered table-condensed table-hover" border="3">'
+	content = '<table class="table table-striped table-bordered table-condensed table-hover fixed-dimensions" border="3">'
 	content += "<tr class='info'><th>Variable</th><th>Value</th></tr>"
 	globals = ""
 	global = "global"
@@ -325,7 +331,7 @@ debug_console = ->
 		i++
 	content += "</table>"
 	if globals.length > 0
-		append = '<table class="table table-striped table-bordered table-condensed table-hover" border="3">'
+		append = '<table class="table table-striped table-bordered table-condensed table-hover fixed-dimensions" border="3">'
 		append += "<tr class='info'><th>Variable</th><th>Value</th></tr>"
 		globals = append + globals
 		globals += "</table>"
@@ -342,7 +348,7 @@ debug_console = ->
 @update_stack_trace = (state_number) ->
 	div = document.getElementById("stack")
 	list_of_methods = variables[state_number]["stack"]
-	content = '<table class="table table-striped table-bordered table-condensed table-hover" border="3">'
+	content = '<table class="table table-striped table-bordered table-condensed table-hover fixed-dimensions" border="3">'
 	content += "<tr class='info'><th>Stack Trace</th></tr>"
 	i = 0
 	while i < list_of_methods.length
@@ -511,3 +517,25 @@ get_editor_session = ->
 get_lang = ->
 	mode = get_editor_session().getMode()["$id"]
 	mode.substring(mode.lastIndexOf("/") + 1)
+
+@toggle_debug_info = ->
+	if $('.cell-hide').length > 0
+		$('.cell-hide').removeClass('cell-hide').addClass('cell-show')
+		$('div.row div.col-sm-12').removeClass('col-sm-12').addClass('col-sm-10')
+	else
+		$('.cell-show').removeClass('cell-show').addClass('cell-hide')
+		$('div.row div.col-sm-10').removeClass('col-sm-10').addClass('col-sm-12')
+	return
+
+@toggle_problem_page = ->
+	elem = $('span#desc.glyphicon.hover')
+	if $('section div.problem.panel-collapse').hasClass('in')
+		$('section div.problem.panel-collapse').collapse('hide')
+	elem.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
+	$('section.problem-body').collapse('toggle')
+	if $('body').css('background-color') == 'rgb(35, 35, 35)'
+		$('body').css('background-color', '#EEEFE9')
+	else
+		$('body').css('background-color', '#232323')
+	$('div#page_id.page_class').collapse('toggle')
+	return
