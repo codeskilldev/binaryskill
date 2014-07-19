@@ -1,4 +1,6 @@
 //= require_tree
+//= require FileSaver
+//= require Blob
 
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
@@ -63,4 +65,57 @@ activate = ->
 jQuery ->
 	if element_exists("mins") and element_exists("secs")
 		activate()
+	if element_exists("editor")
+		editor = ace.edit("editor")
+		edit_session = editor.getSession()
+		default_code = $('#problem_default_code').val()
+		student_code = $('#problem_student_code').val()
+		if student_code == ""
+			edit_session.setValue(default_code)
+		else
+			edit_session.setValue(student_code)
+		editor.setTheme("ace/theme/twilight")
+		edit_session.setMode("ace/mode/java")
+		$('body').on('contextmenu', '#editor > :not(.ace_gutter)', (e) ->
+			false
+		)
+		$('body').on('contextmenu', '#editor > .ace_gutter', (e) ->
+			false
+		)
+		# Add Save Command using Ctrl+S buttons
+		editor.commands.addCommand
+			name: 'Save'
+			bindKey: {win: 'Ctrl-S',  mac: 'Command-S'}
+			exec: (editor) ->
+				class_name = $("#class_name").val()
+				input = editor.getSession().getValue()
+				blob = new Blob([input], type: "text/plain;charset=utf-8")
+				saveAs(blob, class_name + ".java")
+				return
+			readOnly: true # false if this command should not apply in readOnly mode
+
+		ClipBoardText = null
+
+		# Override the Use of Crtl+V combination buttons to paste
+		editor.commands.addCommand
+			name: 'Override-Paste'
+			bindKey: {win: 'Ctrl-V',  mac: 'Command-V'}
+			exec: (editor) ->
+				editor.insert(ClipBoardText)
+			readOnly: true
+		# Override the Use of Crtl+C combination buttons to copy
+		editor.commands.addCommand
+			name: 'Override-Copy'
+			bindKey: {win: 'Ctrl-C',  mac: 'Command-C'}
+			exec: (editor) ->
+				ClipBoardText = editor.getCopyText()
+			readOnly: true
+		# Override the Use of Crtl+X combination buttons to cut
+		editor.commands.addCommand
+			name: 'Override-Cut'
+			bindKey: {win: 'Ctrl-X',  mac: 'Command-X'}
+			exec: (editor) ->
+				ClipBoardText = editor.getCopyText()
+				editor.remove(ClipBoardText)
+			readOnly: false
 	return
