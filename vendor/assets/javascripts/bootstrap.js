@@ -482,8 +482,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     if (this.options.toggle) this.toggle()
   }
 
-  var hash = {}
-
   Collapse.DEFAULTS = {
     toggle: true
   }
@@ -518,14 +516,10 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     this.transitioning = 1
 
     var complete = function () {
-      var complete_height = hash[this.$element][dimension]
-      if(complete_height == undefined)
-        complete_height = ''
       this.$element
         .removeClass('collapsing')
         .addClass('collapse in')
-        [dimension](complete_height)
-        // [dimension]('auto')
+        [dimension]('auto')
       this.transitioning = 0
       this.$element.trigger('shown.bs.collapse')
     }
@@ -548,8 +542,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     if (startEvent.isDefaultPrevented()) return
 
     var dimension = this.dimension()
-
-    hash[this.$element] = {dimension: this.$element[dimension]}
 
     this.$element
       [dimension](this.$element[dimension]())
