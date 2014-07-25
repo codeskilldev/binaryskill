@@ -205,7 +205,14 @@ class Solution < ActiveRecord::Base
 			return ""
 		end
 	end
-
+	
+	# [Updating Track Progress]
+	# Updates the progress of a student in a topic when the they have solved all
+	#	problems in a specific track to move the student to the next one.
+	# Parameters: 
+	#	solution: The solution submitted by the student
+	# Returns: none
+	# Author: Mohab Ghanim
 	def self.update_track_progress solution
 		track = solution.problem.track
 		student = solution.student
