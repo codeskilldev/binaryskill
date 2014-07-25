@@ -51,6 +51,7 @@ class Solution < ActiveRecord::Base
 						response: "Passed!"}
 					unless solution.status == 4 | 5
 						solution.status = 1
+						self.update_track_progress solution
 					end
 				end
 			else
@@ -202,6 +203,20 @@ class Solution < ActiveRecord::Base
 			return "The file name cannot be empty"
 		else
 			return ""
+		end
+	end
+
+	def self.update_track_progress solution
+		track = solution.problem.track
+		student = solution.student
+		student_progression = student.progressions.find_by_topic_id track.topic.id
+		if ( track.difficulty == student_progression.level)
+			student_solved = student.solutions.map {|solution| solution.problem}
+			remaining_problems = track.problems - student_solved
+			if remaining_problems.empty?
+				student_progression.level += 1
+				student_progression.save
+			end
 		end
 	end
 
