@@ -205,7 +205,7 @@ class Solution < ActiveRecord::Base
 			return ""
 		end
 	end
-	
+
 	# [Updating Track Progress]
 	# Updates the progress of a student in a topic when the they have solved all
 	#	problems in a specific track to move the student to the next one.
@@ -218,7 +218,7 @@ class Solution < ActiveRecord::Base
 		student = solution.student
 		student_progression = student.progressions.find_by_topic_id track.topic.id
 		if ( track.difficulty == student_progression.level)
-			student_solved = student.solutions.map {|solution| solution.problem}
+			student_solved = student.solutions.where(:status => 1).map {|solution| solution.problem}
 			remaining_problems = track.problems - student_solved
 			if remaining_problems.empty?
 				student_progression.level += 1
