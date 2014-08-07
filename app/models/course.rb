@@ -24,6 +24,7 @@ class Course < ActiveRecord::Base
 	has_many :students, through: :course_students
 	has_many :contests, dependent: :destroy
 	has_many :assignments, dependent: :destroy
+	has_many :announcements, dependent: :destroy
 
 	has_many :tags, as: :tager
 	has_many :resources, dependent: :destroy
