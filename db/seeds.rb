@@ -907,9 +907,6 @@ puts("# ----------------------- Contests ----------------------- ")
 	Contest.create(title: "DFS", description: "If you can solve this you will get 28 level up",
 		incomplete: false, start_time: DateTime.now + 6.days, end_time: DateTime.now + 19.days)
 
-puts("# ----------------------- Sleeping ----------------------- ")	
-	sleep 3
-puts("# ----------------------- Finished ----------------------- ")	
 puts("# ----------------------- Contests ----------------------- ")
 	ContestProgress.create!(status:true, trials: 1)
 	ContestProgress.create!(status:false, trials: 2)
@@ -955,6 +952,9 @@ puts("# --------------------Universities------------------ ")
 	University.create(:name => "BUC")
 	University.create(:name => "ZUC")
 	University.create(:name => "RUC")
+
+puts("# --------------------Announcements------------------ ")
+	Announcement.create(description: "This course has just been added")
 
 puts("**************************************************************")
 puts("                      Creating Relations                    ")
@@ -1236,6 +1236,8 @@ puts("# ----------------------- Courses ----------------------- ")
 		Course.first.contests << Contest.find(2)
 		Course.find(2).contests << Contest.find(3)
 		Course.first.contests << Contest.find(4)
+	## Announcements
+		Course.first.announcements << Announcement.first
 
 
 puts("# ----------------------- DiscussionBoard ----------------------- ")
@@ -1275,3 +1277,4 @@ puts("# ----------------------- Grades ----------------------- ")
 		# Grade.find_by_id(2).update(problem_id:Assignment.first.problems.find_by_id(2).id)
 
 puts("# --------------------------------------------------------- ")
+puts("# ----------------------- Finished ----------------------- ")	
