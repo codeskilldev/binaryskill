@@ -1,5 +1,6 @@
 class Track < ActiveRecord::Base
 
+	default_scope { order('difficulty ASC') }
 	#Validations
 	validates :difficulty, presence: true, inclusion: { in: (-1..4) }
 	validates :difficulty, uniqueness: { scope: :topic_id,
