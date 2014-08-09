@@ -4,4 +4,5 @@ class University < ActiveRecord::Base
 	validates :name, presence: true
 	#Relations
 	has_many :courses
+
 end

@@ -110,4 +110,8 @@ class Debugger
 		end
 		return {:success => true, data: debugging, status: status}
 	end
+
+	def change_tags_to_html text
+		return text.gsub('<', '&lt;').gsub('>', '&gt;')
+	end
 end

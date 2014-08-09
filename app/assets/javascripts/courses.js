@@ -139,3 +139,58 @@ function acknowledge(courseid){
 		}
 	});
 }
+
+function disable_element(id, bool= true){
+	$('#'+id).prop("disabled", bool);
+}
+
+// [Edit Course Sign Up]
+// Sends request for data to populate form drop-down lists
+// Parameters:
+// 	key: label of drop-downlist, example: university
+// 	value: value selected by user for th previous key, example: 'GUC'
+// Author: Mohab Ghanim
+function add_options(key, value){
+	if (value != ""){
+		$.ajax({
+			type: "GET",
+			url: '/courses/return_list?'+ key + "=" + value ,
+			datatype: 'json',
+			success: function(json){
+				populate_list(json, key)
+			} 
+		})
+	}
+}
+
+// [Edit Course Sign Up]
+// Fills drop-down list with data recieved from ajax request
+// Parameters:
+// 	data: data recieved from request
+// 	key: label of drop-downlist, example: university
+// Author: Mohab Ghanim
+function populate_list(data, key){
+	var element;
+	if (key == "university"){
+		element = $("#course_registration_semester");
+		$("#course_registration_course").val(" ");
+		$("#course_registration_lecturer").val(" ");
+		$("#form_submit").prop("disabled", true);
+	}else if (key == "semester") {
+		element = $("#course_registration_course");
+		$("#course_registration_lecturer").val(" ");
+		$("#form_submit").prop("disabled", true);
+	}else if (key == "course"){
+		element = $("#course_registration_lecturer");
+		$("#form_submit").prop("disabled", true);
+	}
+	if (element) {
+		element.html("");
+		element.prop("disabled", false);
+		element.append("<option></option>")
+		$.each(data, function(i, list_item){
+			list_item = data[i];
+			element.append("<option value=" + i + ">" + list_item + "</option>")
+		})
+	}
+}

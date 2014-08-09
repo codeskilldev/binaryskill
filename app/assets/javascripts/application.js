@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui-1.10.4
+//= require jquery-ui
 //= require jquery.bpopup.min
 //= require jquery.simple-dtpicker
 //= require jquery.plugin
@@ -21,8 +21,7 @@
 //= require alertify
 //= require cocoon
 //= require bootstrap
-//= require bootstrap-wysihtml5/b3
-//= require bootstrap-wysihtml5/locales
+//= require bootstrap-wysihtml5
 //= require helper
 //= require tabs
 //= require utilities
