@@ -954,7 +954,7 @@ puts("# --------------------Universities------------------ ")
 	University.create(:name => "RUC")
 
 puts("# --------------------Announcements------------------ ")
-	Announcement.create(description: "This course has just been added")
+	Announcement.create(description: "This course has just been added", owner: Lecturer.first)
 
 puts("**************************************************************")
 puts("                      Creating Relations                    ")

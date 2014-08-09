@@ -1,4 +1,4 @@
-urun: usearch
+urun:
 	sudo /etc/init.d/postgresql start
 	foreman start
 
@@ -9,12 +9,12 @@ uinstall:
 	sudo apt-get libpq-dev
 
 usearch:
-	../elasticsearch/bin/elasticsearch &
+	../elasticsearch/bin/elasticsearch
 
 usearch-clean:
 	rm -rf ../elasticsearch/data/elasticsearch/nodes/*
 	rm -rf ../elasticsearch/logs/*
 
-useed: usearch-clean usearch
+useed: usearch-clean
 	rake db:schema:load
 	rake db:seed
