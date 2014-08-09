@@ -38,6 +38,7 @@ class Lecturer < ActiveRecord::Base
 	has_many :hints, as: :owner
 	has_many :acknowledgements, dependent: :destroy
 	has_many :tags, as: :owner
+	has_many :announcements, as: :owner
 	
 	has_many :problems, class_name:"Problem", as: :owner
 
