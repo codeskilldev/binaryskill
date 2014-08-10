@@ -1,0 +1,44 @@
+- if @course.can_edit current_teaching_assistant, current_lecturer
+	- can_edit = true
+	- content_for :javascripts do
+		= javascript_include_tag "announcements"
+- else
+	- can_edit = false
+.left-box
+	.xob{style: 'padding : 0px 15px 2px;'}
+		.course_info.panel-body
+			.row.c_title
+				.c_code= @course.code
+				.c_name=link_to @course.name, @course, style: "color: black"
+			.row
+				.course_sem
+					Semester
+					= @course.semester
+					Class
+					= @course.year
+		.well.header
+			%h1
+				%b Announcements
+			%hr
+		.container.announcement
+			.row.well.main_row{data: {course: params[:course_id]}}
+				- @announcements.each do |announcement|
+					.row{id: 'announcement_' + announcement.id.to_s}
+						- if can_edit
+							.col-sm-10{id: 'announcement_content_' + announcement.id.to_s}
+								%h2= announcement.description.html_safe
+							.col-sm-2
+								.col-sm-5.pull-right= image_tag "delete_button_2.png",
+									onclick: "delete_announcement(#{announcement.id})"
+								.col-sm-5.pull-right= image_tag "edit_button.png",
+									onclick: "edit_announcement(#{announcement.id})"
+						- else
+							%h2= announcement.description.html_safe
+					.pull-right{id: "announcement_date_#{announcement.id}"}
+						%font
+							= (distance_of_time_in_words_to_now announcement.updated_at)
+							ago
+					%hr
+				- if can_edit
+					%textarea#textarea_new
+					%input#announcement_new.btn.btn-default.btn-sm{value: :Add}

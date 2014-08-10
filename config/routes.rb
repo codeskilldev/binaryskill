@@ -1,5 +1,5 @@
 Tutor::Application.routes.draw do
-	
+
 	ActiveAdmin.routes(self)
 	devise_for :admin_users, ActiveAdmin::Devise.config
 	devise_for :teaching_assistants
@@ -12,6 +12,8 @@ Tutor::Application.routes.draw do
 	# Example of regular route:
 	#   get 'products/:id' => 'catalog#view'
 	# 	get 'products/index'
+	get 'announcements/:course_id' => 'announcements#index', as: 'course_announcements'
+	post 'announcements/:course_id/create' => 'announcements#create', as: 'create_announcement'
 	get 'courses/sign_up'
 	get 'courses/find_course/:id' => 'courses#find_course'
 	get 'tracks/show_classmates/:id' => 'tracks#show_classmates'
@@ -66,6 +68,7 @@ Tutor::Application.routes.draw do
 	resources :cproblems
 	resources :contests
 	resources :contributors
+	resources :announcements
 
 	post "courses/choose"
 	post "courses/existing"
