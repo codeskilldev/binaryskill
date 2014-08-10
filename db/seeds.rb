@@ -955,9 +955,9 @@ puts("# --------------------Universities------------------ ")
 
 puts("# --------------------Announcements------------------ ")
 	Announcement.create(description: "This course has just been added", owner: Lecturer.first)
-	Announcement.create(description: "This the first announcement in this course", owner: Lecturer.first)
-	Announcement.create(description: "This the second announcement in this course", owner: Lecturer.first)
-	Announcement.create(description: "This the third announcement in this course", owner: Lecturer.first)
+	Announcement.create(description: "This is the first announcement in this course", owner: Lecturer.first)
+	Announcement.create(description: "This is the second announcement in this course", owner: Lecturer.first)
+	Announcement.create(description: "This is the third announcement in this course", owner: Lecturer.first)
 
 puts("**************************************************************")
 puts("                      Creating Relations                    ")
