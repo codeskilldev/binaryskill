@@ -48,8 +48,44 @@ edit_form_announcement = (id, data) ->
 		type: "DELETE"
 		url: "/announcements/#{id}"
 		success: ->
-			$("#announcement_content_#{id}").remove()
-			$("#announcement_date_#{id}").next("hr").remove()
-			$("#announcement_date_#{id}").remove()
+			$("#announcement_#{id}").fadeOut 500, ->
+				$(this).remove()
+			$("#announcement_date_#{id}").next("hr").fadeOut 500, ->
+				$(this).remove()
+			$("#announcement_date_#{id}").fadeOut 500, ->
+				$(this).remove()
 		error: ->
 			alert "Failed to delete the announcement, Try again Later"
+
+create_new_announcement = (data) ->
+	elem_text = "<div class='row' id='announcement_#{data.id}'>\
+		<div class='col-sm-10' id='announcement_content_#{data.id}'>\
+		<h2>#{data.content}</h2></div>\
+		<div class='col-sm-2'><div class='col-sm-5 pull-right'>\
+		<img alt='Delete button 2' onclick='delete_announcement(#{data.id})' \
+		src='/assets/delete_button_2.png'></div>\
+		<div class='col-sm-5 pull-right'><img alt='Edit button' \
+		onclick='edit_announcement(#{data.id})' src='/assets/edit_button.png'></div>\
+		</div></div>\
+		<div class='pull-right' id='announcement_date_#{data.id}'><font>#{data.date}</font></div><hr>"
+	$(".announcement .main_row").prepend($(elem_text))
+	$("#textarea_new").val("")
+
+$ ->
+	$("#announcement_new").click ->
+		data_input = $("#textarea_new").val()
+		$.ajax
+			type: "POST"
+			url: "/announcements"
+			data: 
+				content: data_input
+				course_id: $(".announcement .main_row").data("course")
+			success: (data) ->
+				create_new_announcement data
+				e.preventDefault()
+				$('html, body').animate
+					scrollTop: $("#announcement_#{data.id}").offset().top
+				, 2000
+				return
+			error: ->
+				alert "Failed to add new announcement, Try again Later"

@@ -22,6 +22,9 @@
 	border-bottom: 1px solid #1a5f63 !important;
 	padding-bottom: 1%;
 }
+.announcement #textarea_new{
+	min-height: 100px;
+}
 /* details */
 	.announcement font {
 		font-size: 0.9em;
@@ -30,5 +33,9 @@
 @media (max-width: 767px) {
 	.announcement font {
 		font-size: 0.7em;
+	}
+
+	.announcement #textarea_new{
+		min-height: 50px;
 	}
 }
