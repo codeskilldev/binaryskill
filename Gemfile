@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.4'
+gem 'rails', '4.1.4'
 
 # User authentication
 gem 'devise'
@@ -24,6 +24,9 @@ gem 'rails_12factor', group: :production
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
+
+# Use haml for .html.haml assets and views
+gem "haml-rails"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -60,7 +63,10 @@ gem 'foreman'
 # gem 'debugger', group: [:development, :test]
 
 # Use composite primary keys in models
-gem 'composite_primary_keys', '~> 6.0.1'
+gem 'composite_primary_keys', {
+	:git => 'git://github.com/composite-primary-keys/composite_primary_keys.git',
+	:branch => 'ar_4.1.x'
+}
 gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem 'acts_as_list'
@@ -87,4 +93,9 @@ gem "cocoon"
 group :development, :test do
 	gem 'rspec-rails', '~> 3.0.0.beta'
 	gem "capybara"
+end
+
+group :development do
+	gem "bullet"
+	gem 'brakeman', :require => false
 end

@@ -1,64 +1,64 @@
-<br><br>
 <div class="a4" >
 
-	<table width='100%'><tr><td>
-		
-		<div style="float:left; margin:5px; margin-left:10px;">
-			<img src="/assets/compile_w.png" id='compileButton' onClick= "compile(<%=params[:id]%>, 'Problem')"
-			style= "height:26px; width:26px; cursor:pointer; float:left;" title="Compile" ></img>
-		</div>
+	<table width='100%'>
+		<col width="35%">
+		<tr><td>
 
-		<div style="float:left; margin:5px;">
-			<img src="/assets/run_w.png" id='testButton' onClick= "run_input(<%=params[:id]%>, 'Problem')"
-			style= "height:26px; width:26px; cursor:pointer; float:left;" title="Run Test Case" ></img>
-		</div>
+		<!-- <div style="float:left; margin:5px; margin-left:10px;"> -->
+			<img src="/assets/compile_w.png" id='compileButton' onClick= "compile(<%=params[:id]%>, 'Problem')" class="solution-bar" style= "cursor:pointer;" title="Compile" ></img>
+		<!-- </div> -->
 
-		<div style="float:left; margin:5px;">
-			<img src="/assets/debug_w.png" id='debugButton' onClick= "start_debug(<%=params[:id]%>, 'Problem')"
-			style= "height:26px; width:26px; cursor:pointer; float:left;" title="Start Debugging" ></img>
+		<!-- <div style="float:left; margin:5px;"> -->
+			<img src="/assets/run_w.png" id='testButton' onClick= "run_input(<%=params[:id]%>, 'Problem')" class="solution-bar" style= "cursor:pointer;" title="Run Test Case" ></img>
+					
+		<!-- </div> -->
+
+		<!-- <div style="float:left; margin:5px;"> -->
+		<div class="btn-group">
+			<img src="/assets/debug_w.png" id='debugButton' onClick= "start_debug(<%=params[:id]%>, 'Problem')" class="solution-bar" style= "cursor:pointer;" title="Start Debugging" ></img>
+			<span class="glyphicon hover glyphicon-eject"style= "cursor:pointer;"
+			onclick="toggle_debug_info()"></span>
+		<!-- </div> -->
 		</div>
 		
-		
-		<div style="float:left; margin:5px; margin-left:-25px;">
+		<!-- <div style="float:left; margin:5px; margin-left:-25px;"> -->
 			<img src="/assets/previous_w.png" id='previousButton' onClick= "previous()"
-			style= "height:26px; width:26px; cursor:pointer; float:left;" title="Previous" hidden="true" ></img>
-		</div>
+			class="solution-bar" style= "cursor:pointer;" title="Previous" hidden="true" ></img>
+		<!-- </div> -->
 
-		<div style="float:left; margin:5px;">
-			<img src="/assets/next_w.png" id='nextButton' onClick= "next()"
-			style= "height:26px; width:26px; cursor:pointer; float:left;" title="Next" hidden="true" ></img>
-		</div>
+		<!-- <div style="float:left; margin:5px;"> -->
+			<img src="/assets/next_w.png" id='nextButton' onClick= "next()" class="solution-bar"
+			style= "cursor:pointer;" title="Next" hidden="true" ></img>
+		<!-- </div> -->
 		
-		<div style="float:left; margin:5px;">
-			<img src="/assets/stop_w.png" id='stopButton' onClick= "stop()"
-			style= "height:26px; width:26px; cursor:pointer; float:left;" title="Stop Debugging" hidden="true" ></img>
-		</div>
+		<!-- <div style="float:left; margin:5px;"> -->
+			<img src="/assets/stop_w.png" id='stopButton' onClick= "stop()" class="solution-bar"
+			style= "cursor:pointer;" title="Stop Debugging" hidden="true" ></img>
+		<!-- </div> -->
 
-		<div style"width:20px;">
-			<span id="spinner" align="center" style="float:left; margin-left:-17px; margin-top:5px;
-			width:26px; height:26px; margin-right:5px;"></span>
-		</div>
-
-
-		<div class="a7" style="float:left; margin:5px; color:rgb(35,35,35); height:26px; padding:2px;
+		<!-- <div style"width:20px;"> -->
+			<span id="spinner" style="margin-bottom: -10px; width:26px; height:26px;"></span>
+		<!-- </div> -->
+		</td><td>
+		<!-- <div class="a7" style="float:left; margin:5px; color:rgb(35,35,35); height:26px; padding:2px;
 		background-color:rgb(248,248,248); border-top-left-radius:4px; border-bottom-left-radius:4px;
-		border-color:rgb(248,248,248); border-right:none; padding-right:5px;">
+		border-color:rgb(248,248,248); border-right:none; padding-right:5px;"> -->
 			<b>File Name:</b>
-		</div>
+		<!-- </div> -->
 
 		<input id="class_name" type="text" class="a7" value="CoolSoft"
-		style="width:150px; height:26px; float:left; margin:5px; margin-left:-9px; padding:5px; border-left:none;">
+			style="width:150px; height:24px; padding:5px;">
 
 
-		<div style="float:left; margin:5px;">
+		<!-- <div style="float:left; margin:5px;"> -->
 			<img src="/assets/reload_w.png" id='reloadButton' onClick= "reload_template()"
-			style= "height:26px; width:26px; cursor:pointer; float:left;" title="Reload Template" ></img>
-		</div>
-
-		<div style=" float:right; margin:5px;">
-			<img src="/assets/submit_w.png" id='submitButton' onClick= "validate_code(<%=params[:id]%>, '<%=@type%>')"
-			style= "height:26px; width:26px; cursor:pointer; float:right;" title="Submit" ></img>
-		</div>
+			class="solution-bar" style= "cursor:pointer;" title="Reload Template" ></img>
+		<!-- </div> -->
+		</td><td>
+		<!-- <div style=" float:right; margin:5px;"> -->
+			<img src="/assets/submit_w.png" id='submitButton' onClick= "validate_code(<%=params[:id]%>, '<%=@type%>')" class="solution-bar pull-right" style= "cursor:pointer;" title="Submit">
+			</img>
+		<!-- </div> -->
 
 	</td></tr></table>
 	

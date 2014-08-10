@@ -14,41 +14,41 @@ class CoursesController < ApplicationController
 	#	@lecturer: The chosen lecturer
 	# Author: Ahmed Moataz
 	def sign_up
-		@status = params[:status]
-		if student_signed_in?
-			case params[:status]
-			when nil
-				@courses = Course.select(:university).distinct
-				@status = "1"
-			when "2"
-				@courses = Course.where(university: params[:university]).
-					select(:semester).distinct
-			when "3"
-				@courses = Course.where(semester: params[:semester],
-					university: params[:university])
-			when "4"
-				@course = Course.find(params[:id])
-			when "5"
-				@course = Course.find(params[:id])
-				@lecturer = Lecturer.find(params[:lecturer])
-			when "6"
-				@course = Course.find(params[:id])
-				@lecturer = Lecturer.find(params[:lecturer])
-				student = Student.find(current_student.id)
-				if student.courses.find_by_id(@course.id) == nil
-					student.courses << @course
-					Notification.lecturer_notify(@lecturer.id, @course.id, student.id)
-					@course.topics.each do |topic|
-						progress = TrackProgression.create(level: 0, topic_id: topic.id)
-						student.progressions << progress
-					end
-				else
-					@status = "7"
-				end
-			end
-		else
-			@status = "0"
+		@universities = University.all
+	end
+
+	def register
+		course_registration = permit_params
+		course = Course.find(course_registration[:course])
+		current_student.courses << course
+		Notification.lecturer_notify(course_registration[:lecturer],
+			course_registration[:course], current_student)
+		course.topics.each do |topic|
+			progress = TrackProgression.create(level: 0, topic_id: topic.id)
+			current_student.progressions << progress
 		end
+		redirect_to :controller => 'courses', :action => 'index'
+	end
+
+	def return_list
+		returned_value = Hash.new
+		if params[:university]
+			University.find(params[:university]).courses.each do |course|
+				returned_value[course.semester] = course.semester
+			end
+			session[:university] = params[:university]
+		elsif params[:semester]
+			list = University.find(session[:university]).courses.where(:semester => params[:semester])
+			list -= current_student.courses
+		elsif params[:course]
+			list = Course.find(params[:course]).lecturers
+		end
+		if !params[:university]
+			list.each do |item|
+				returned_value[item.id] = item.name
+			end
+		end
+		render json: returned_value
 	end
 
 	# [View Courses - Stroy 1.11]
@@ -164,16 +164,16 @@ class CoursesController < ApplicationController
 	# Returns: The view of the requested course
 	# Author: Mohamed Metawaa
 	def show
-		@course = Course.find_by_id(params[:id])
+		@course = Course.includes(:topics).find_by_id(params[:id])
 		if @course
 			@topics = @course.topics
 			tracks = []
-			@topics.each do |t|
+			@topics.includes(:tracks).each do |t|
 				tracks = tracks + t.tracks
 			end			
 			@assignments = @course.assignments
 			assignment_problems = []
-			@assignments.each do |a|
+			@assignments.includes(:problems).each do |a|
 				assignment_problems = assignment_problems + a.problems
 			end
 			@can_edit = @course.can_edit(current_lecturer, current_teaching_assistant)
@@ -347,6 +347,10 @@ class CoursesController < ApplicationController
 			else
 				return false
 			end
+		end
+
+		def permit_params
+			params.require(:course_registration).permit(:course, :lecturer, :student, :topic_id)
 		end
 
 end
