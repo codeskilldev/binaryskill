@@ -1,0 +1,22 @@
+	.announcement {
+		width:100% !important;
+		background-color:white;
+		padding-bottom: 5%;
+	}
+	.announcement h2{
+		font-size: 1.7em;
+	}
+	.announcement .box {
+		border-bottom: 1px solid #1a5f63 !important;
+		padding-bottom: 1%;
+	}
+	/* details */
+		.announcement font {
+			font-size: 0.9em;
+		}
+
+@media (max-width: 767px) {
+	.announcement font {
+		font-size: 0.7em;
+	}
+}

@@ -31,6 +31,9 @@
 		<div class="view_discussion">
 			<%= link_to "View Resources", course_resources_path(@course)%>
 		</div>
+		<div class="view_discussion">
+			<%= link_to "View Announcements", course_announcements_path(params[:id])%>
+		</div>
 		<div class="tag-area"> 
 			<span class="view_discussion"> Tags : </span>	
 			<% @course.tags.each do |tag| %>
@@ -38,6 +41,20 @@
 			<% end %>	
 		</div>
 				
+	</div>
+
+	<div class="xox">
+		<div class="well bell">
+			<div class="box-title"> Recent Announcement</div>
+			<% announcement = @course.announcements.first %>
+			<div class="row">
+				<div class="container col-sm-12 box-bag topic-box">
+					<div class="well topic-box" style="background-color: #d7dde2 !important;">
+						<h3><%= announcement.description %></h3>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="xox">
