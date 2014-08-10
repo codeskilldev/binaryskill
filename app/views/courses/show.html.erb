@@ -43,19 +43,21 @@
 				
 	</div>
 
-	<div class="xox">
-		<div class="well bell">
-			<div class="box-title"> Recent Announcement</div>
-			<% announcement = @course.announcements.first %>
-			<div class="row">
-				<div class="container col-sm-12 box-bag topic-box">
-					<div class="well topic-box" style="background-color: #d7dde2 !important;">
-						<h3><%= announcement.description %></h3>
+	<% announcement = @course.announcements.first %>
+	<% if announcement %>
+		<div class="xox">
+			<div class="well bell">
+				<div class="box-title"> Recent Announcement</div>
+				<div class="row">
+					<div class="container col-sm-12 box-bag topic-box">
+						<div class="well topic-box" style="background-color: #d7dde2 !important;">
+							<h3><%= announcement.description %></h3>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	<% end %>
 
 	<div class="xox">
 		<div class="well bell">

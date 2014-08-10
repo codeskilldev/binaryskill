@@ -955,6 +955,9 @@ puts("# --------------------Universities------------------ ")
 
 puts("# --------------------Announcements------------------ ")
 	Announcement.create(description: "This course has just been added", owner: Lecturer.first)
+	Announcement.create(description: "This the first announcement in this course", owner: Lecturer.first)
+	Announcement.create(description: "This the second announcement in this course", owner: Lecturer.first)
+	Announcement.create(description: "This the third announcement in this course", owner: Lecturer.first)
 
 puts("**************************************************************")
 puts("                      Creating Relations                    ")
@@ -1237,7 +1240,10 @@ puts("# ----------------------- Courses ----------------------- ")
 		Course.find(2).contests << Contest.find(3)
 		Course.first.contests << Contest.find(4)
 	## Announcements
-		Course.first.announcements << Announcement.first
+		Course.first.announcements << Announcement.find_by_id(1)
+		Course.first.announcements << Announcement.find_by_id(2)
+		Course.first.announcements << Announcement.find_by_id(3)
+		Course.first.announcements << Announcement.find_by_id(4)
 
 
 puts("# ----------------------- DiscussionBoard ----------------------- ")
