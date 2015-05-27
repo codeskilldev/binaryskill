@@ -15,7 +15,7 @@
  *= require alertify-themes/alertify.core
  *= require posts
  *= require jquery.countdown.css
- *= require bootstrap-wysihtml5/b3
+ *= require bootstrap-wysihtml5
  *= require_tree .
  */
 
@@ -23,7 +23,7 @@
 	width: 100%;
 	height: 100%;
 	overflow-x: hidden;
-	background: #EEEFE9 !important;
+	/*background: #EEEFE9;*/
 }
 body .container {
 	
@@ -117,4 +117,12 @@ a:hover{
     background: none !important;
     color: #222;
     font-weight: bold;
+}
+
+.gradually-change{
+	-webkit-transition: all 0.35s ease-in-out;
+	-moz-transition: all 0.35s ease-in-out;
+	-o-transition: all 0.35s ease-in-out;
+	-ms-transition: all 0.35s ease-in-out;
+	transition: all 0.35s ease-in-out;
 }

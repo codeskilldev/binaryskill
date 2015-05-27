@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617132031) do
+ActiveRecord::Schema.define(version: 20140715175136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,10 +168,10 @@ ActiveRecord::Schema.define(version: 20140617132031) do
     t.string   "code"
     t.integer  "year"
     t.integer  "semester"
-    t.string   "university"
+    t.integer  "university_id"
     t.text     "description"
-    t.boolean  "visible",     default: false
-    t.boolean  "incomplete",  default: true
+    t.boolean  "visible",       default: false
+    t.boolean  "incomplete",    default: true
     t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -534,6 +534,12 @@ ActiveRecord::Schema.define(version: 20140617132031) do
     t.integer  "topic_id"
     t.integer  "owner_id"
     t.string   "owner_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "universities", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
