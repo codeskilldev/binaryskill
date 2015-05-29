@@ -33,7 +33,7 @@ class Debugger
 			end
 		}
 		check_termination buffer
-		return buffer
+		return buffer.force_encoding("ASCII-8BIT").force_encoding("UTF-8").encode(:invalid => :replace)
 	end
 
 	# [Debugger: Debug - Story 3.6]
