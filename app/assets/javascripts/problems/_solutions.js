@@ -14,6 +14,7 @@ $(document).ready(function(e){
 // Returns: none.
 // Author: Mimi
 function changeTheme(){
+	editor = ace.edit("editor");
 	var new_theme = $('#theme').val();
 	editor.setTheme("ace/theme/"+new_theme);
 }
@@ -25,6 +26,8 @@ function changeTheme(){
 // Returns: none.
 // Author: Mimi
 function changeMode(){
+	editor = ace.edit("editor");
+	edit_session = editor.getSession();
 	var new_mode = $('#mode').val();
 	edit_session.setMode("ace/mode/"+new_mode);
 }
@@ -36,6 +39,7 @@ function changeMode(){
 // Returns: none.
 // Author: Mimi
 function changeFont(){
+	editor = ace.edit("editor");
 	var new_font = $('#font').val();
 	editor.setFontSize(parseInt(new_font));
 }
@@ -46,6 +50,7 @@ function changeFont(){
 // Returns: none
 // Author: Ahmed Moataz
 function increaseFont(){
+	editor = ace.edit("editor");
 	var new_font = editor.getFontSize();
 	if (new_font < 24) {
 		new_font += 2;
@@ -59,6 +64,7 @@ function increaseFont(){
 // Returns: none
 // Author: Ahmed Moataz
 function decreaseFont(){
+	editor = ace.edit("editor");
 	var new_font = editor.getFontSize();
 	if (new_font > 12) {
 		new_font -= 2;
