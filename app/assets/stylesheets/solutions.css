@@ -85,7 +85,8 @@ textarea  {
 	min-height: 100px;
 	height: 100px !important;
 	width: 100%;
-	border-color:#999999;
+	border-color:#999999 !important;
+	color:#999999 !important;
 }
 
 .compilation_succeeded {
