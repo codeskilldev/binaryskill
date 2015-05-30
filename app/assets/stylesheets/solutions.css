@@ -1,5 +1,5 @@
 textarea  {
-	resize: none;
+	resize: none !important;
 }
 
 .problem {
@@ -37,7 +37,8 @@ textarea  {
     right: 0;
     top: 0;
     bottom: 0;
-    height: 23.5pc;
+    /*height: 23.5pc;*/
+    height: 62vh;
 }
 
 .fixed-content {
@@ -72,6 +73,7 @@ textarea  {
 	border-style: solid;
 	border-width: thin;
 	min-height: 100px;
+	height: 100px;
 	background: white;
 	overflow: auto;
 	width: 100%;
@@ -81,7 +83,9 @@ textarea  {
 
 .code_input{
 	min-height: 100px;
+	height: 100px !important;
 	width: 100%;
+	border-color:#999999;
 }
 
 .compilation_succeeded {
